@@ -1,0 +1,55 @@
+<div id="divfrmAltaUsuario" title="Alta de Usuario">
+  <form id="frmAltaUsuario" class="form-horizontal">
+    <fieldset>
+
+      <!-- Input Email, restricciones tipicas.-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtEmail">Email</label>
+        <div class="col-md-12">
+          <input id="txtEmail" name="txtEmail" type="text" placeholder="ejemplo@correo.com" class="form-control">
+        </div>
+      </div>
+
+      <!-- ¿Meter campo apellido? 3 letras mínimo-->
+      <div class="form-group">
+        <label for="txtNombre">Nombre</label>
+        <div class="col-md-12">
+          <input id="txtNombre" type="text" name="txtNombre" placeholder="Mario Sánchez" class="form-control">
+        </div>
+      </div>
+
+      <!-- 8 carácteres mínimo-->
+      <div class="form-group">
+        <label for="txtContra">Contraseña</label>
+        <div class="col-md-12">
+          <input id="txtContra" type="password" name="txtContra" placeholder="Cinco Caracteres Minimo" class="form-control">
+        </div>
+      </div>
+
+      <!-- X caracteres minimo-->
+      <div class="form-group">
+        <label for="txtDireccion">Direccion</label>
+        <div class="col-md-12">
+          <input id="txtDireccion" type="text" name="txtDireccion" placeholder="Avenida de España, 14" class="form-control">
+        </div>
+      </div>
+
+      <!-- Input Telefono restricciones típicas-->
+      <div class="form-group">
+        <label for="txtTelefono">Telefono</label>
+        <div class="col-md-12">
+          <input id="txtTelefono" type="text" name="txtTelefono" placeholder="955 08 54 89" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sel1">Tipo de Usuario:</label>
+        <select class="form-control" id="txtTipo" name="txtTipo">
+          <option>Estandar</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+    </fieldset>
+  </form>
+
+</div>
