@@ -29,6 +29,6 @@
   //print_r($insertarUsuario);
 
 
-  echo '<div class="alert alert-success fixed-top" role="alert">Se modificó la noticia correctamente</div>';
+  echo '<div class="alert alert-warning alert-dismissable" role="alert">Se modificó la noticia correctamente</div>';
 
 ?>

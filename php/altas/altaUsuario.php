@@ -29,5 +29,4 @@
   $actualizarUsuario = $con->prepare("UPDATE usuarios JOIN jugadores ON jugadores.emailJugador = usuarios.emailUsuario SET usuarios.idJugadorFK = jugadores.idJugador");
   $actualizarUsuario->execute();
   
-  echo "Todo fue bien";
 ?>
