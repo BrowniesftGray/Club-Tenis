@@ -32,6 +32,9 @@ session_start();
         width: 80%;
       }
 
+      th,td{
+        text-align: center;
+      }
     </style>
 
   </head>
@@ -153,7 +156,39 @@ session_start();
             </thead>
             <tbody>
               <?php
+              $usuario = 'root';
+              $contraRoot = '';
 
+              try {
+                $con = new PDO('mysql:host=localhost;dbname=club;charset=utf8', $usuario, $contraRoot);
+                $mbd = null;
+              } catch (PDOException $e) {
+                  print "¡Error!: " . $e->getMessage() . "<br/>";
+                  die();
+              }
+
+              //Realización de
+              $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento");
+              $sql->execute();
+
+              $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+              for ($i=0; $i < count($rows); $i++) {
+                echo "<tr>";
+                  echo "<td>";
+                  echo $rows[$i]['nombreEvento'];
+                  echo "</td>";
+                  echo "<td>";
+                  echo $rows[$i]['fechaEvento'];
+                  echo "</td>";
+                  echo "<td>";
+                  echo "Botón para acceder a listados de los transportes de la competición.";
+                  echo "</td>";
+                  echo "<td>";
+                  echo "Boton para acceder a inscripción o borrarse.";
+                  echo "</td>";
+                echo "</tr>";
+              }
               ?>
             </tbody>
           </table>
