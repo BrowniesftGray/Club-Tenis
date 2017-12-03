@@ -140,7 +140,7 @@ session_start();
         <div class="col-md-8">
           <h1 class="my-4">
             Eventos Deportivos
-            <a href="nuevaCompeticion.php" class="btn btn-info">Nueva Competición</a>
+            <a href="procesos/nuevaCompeticion.php" class="btn btn-info">Nueva Competición</a>
           </h1>
         </div>
       </div>

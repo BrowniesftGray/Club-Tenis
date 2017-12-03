@@ -66,7 +66,7 @@ session_start();
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Eventos Deportivos</a>
+              <a class="nav-link" href="eventos.php">Eventos Deportivos</a>
             </li>
             <!-- Solo para admins, se abren en una pestaña nueva lista para imprimir o guardar en pdf-->
             <?php
