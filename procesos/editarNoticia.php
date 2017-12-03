@@ -41,7 +41,7 @@ session_start();
 
 
     if (isset($_POST["btnNoticia"])) {
-        include("php/Modificaciones/updateNoticia.php");
+        include("../php/Modificaciones/updateNoticia.php");
     }
 
   ?>

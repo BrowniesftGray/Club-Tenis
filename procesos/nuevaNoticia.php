@@ -66,7 +66,7 @@ session_start();
         echo '<div class="alert alert-warning fixed-top" role="alert">'.$sError.'</div>';
       }
       else{
-        include("php/altas/altaNoticia.php");
+        include("../php/altas/altaNoticia.php");
       }
     }
 
