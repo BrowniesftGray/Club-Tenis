@@ -39,7 +39,7 @@ session_start();
   if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST["btnNoticia"])) {
-        include("php/Borrado/deleteNoticia.php");
+        include("../php/Borrado/deleteNoticia.php");
     }
 
   ?>
@@ -117,7 +117,7 @@ session_start();
     <?php
   }
   else{
-    echo "No tiene acceso a esta característica, <a href='login.php'>conéctese</a>.";
+    echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button><a href="login.php>"conéctese</a>';
   }
     ?>
 </body>

@@ -43,7 +43,7 @@ if (!isset($_SESSION)) {
   }
 
   if ($respuesta['existe'] == 'No') {
-    echo '<div class="alert alert-warning fixed-top" role="alert">No existe el usuario</div>';
+    echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button> No existe el usuario</div>';
   }
   else{
     header("Location:../index.php");

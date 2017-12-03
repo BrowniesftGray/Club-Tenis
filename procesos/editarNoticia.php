@@ -41,7 +41,7 @@ session_start();
 
 
     if (isset($_POST["btnNoticia"])) {
-        include("php/Modificaciones/updateNoticia.php");
+        include("../php/Modificaciones/updateNoticia.php");
     }
 
   ?>
@@ -128,11 +128,11 @@ session_start();
     <?php
     }
     else{
-      echo '<div class="alert alert-warning fixed-top" role="alert">No ha ingresado de la forma correspondiente, <a href="../index.php">vuelva al inicio</a>.</div>';
+      echo '<div class="alert alert-warning alert-dismissable" role="alert">No ha ingresado de la forma correspondiente, <a href="../index.php">vuelva al inicio</a>.</div>';
     }
   }
   else{
-    echo '<div class="alert alert-warning fixed-top" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
   }
     ?>
 </body>

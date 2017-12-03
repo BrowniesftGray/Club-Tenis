@@ -39,7 +39,7 @@ session_start();
   if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST['btnActualizar'])) {
-      include("php/Modificaciones/updateUsuario.php");
+      include("../php/Modificaciones/updateUsuario.php");
     }
 
   if (!isset($_POST['btnUsuario']) && !isset($_POST['btnActualizar'])) {
@@ -259,7 +259,7 @@ session_start();
   }
 }
 else{
-  echo '<div class="alert alert-warning fixed-top" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+  echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
 }
   ?>
 </body>

@@ -63,10 +63,10 @@ session_start();
       }
 
       if ($bValido == false) {
-        echo '<div class="alert alert-warning fixed-top" role="alert">'.$sError.'</div>';
+        echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>'.$sError.'</div>';
       }
       else{
-        include("php/altas/altaNoticia.php");
+        include("../php/altas/altaNoticia.php");
       }
     }
 
