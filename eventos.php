@@ -142,7 +142,7 @@ session_start();
             Eventos Deportivos
             <a href="procesos/nuevaCompeticion.php" class="btn btn-info">Nueva Competición</a>
           </h1>
-          <table class="table table-bordered">
+          <table class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th>Nombre de Evento</th>
@@ -153,7 +153,7 @@ session_start();
             </thead>
             <tbody>
               <?php
-              
+
               ?>
             </tbody>
           </table>
