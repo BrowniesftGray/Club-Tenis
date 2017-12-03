@@ -137,11 +137,26 @@ session_start();
       <div class="row">
 
         <!-- Blog Entries Column -->
-        <div class="col-md-8">
+        <div class="col-md-12">
           <h1 class="my-4">
             Eventos Deportivos
             <a href="procesos/nuevaCompeticion.php" class="btn btn-info">Nueva Competición</a>
           </h1>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Nombre de Evento</th>
+                <th>Fecha de Comienzo</th>
+                <th>Inscribirse</th>
+                <th>Resultados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              
+              ?>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
