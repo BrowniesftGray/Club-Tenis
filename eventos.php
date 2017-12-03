@@ -147,8 +147,8 @@ session_start();
               <tr>
                 <th>Nombre de Evento</th>
                 <th>Fecha de Comienzo</th>
-                <th>Inscribirse</th>
-                <th>Resultados</th>
+                <th>Transporte</th>
+                <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
