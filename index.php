@@ -142,7 +142,7 @@ session_start();
           <h1 class="my-4">Noticias
             <?php if ($_SESSION['tipo'] == "Administrador") {
             ?>
-            <a href="procesos/nuevaNoticia.php"  target="_blank"class="btn btn-success">Nueva Noticia</a>
+            <a href="procesos/nuevaNoticia.php" class="btn btn-success">Nueva Noticia</a>
             <?php
           }?>
           </h1>
