@@ -42,5 +42,5 @@
   $insertarCompeticion = $con->prepare("INSERT INTO noticias (titulo, descripcion, rutaImagen, fechaPublicacion, emailUsuarioFK) VALUES ('$titulo','$descripcion', '$imagen', '$fecha', '$email')");
   $insertarCompeticion->execute();
 
-  echo '<div class="alert alert-warning alert-dismissable" role="alert">Se añadió la noticia correctamente</div>';
+  echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert"></button>Se añadió la noticia correctamente</div>';
 ?>

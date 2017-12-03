@@ -34,7 +34,7 @@ session_start();
     </style>
     <script type="text/javascript">
     $( function() {
-      $( "#txtfechaEvento" ).datepicker();
+      $( "#txtfechaEvento" ).datepicker({dateFormat: 'yy-mm-dd'});
     } );
     </script>
 </head>
