@@ -1,7 +1,7 @@
 <?php
 
   if (!isset($_POST['btnAceptar'])) {
-    
+
   }
   else{
 
@@ -17,7 +17,7 @@
   }
 
   //Realización de
-  $sql = $con->prepare("SELECT jugadores.nombreJugador, competiciones.idCompeticion, competiciones.nombreEvento FROM ((inscripciones INNER JOIN jugadores ON inscripciones.idJugadorFK = jugadores.idJugador) INNER JOIN jugadores ON inscripciones.idJugadorFK = jugadores.idJugador) WHERE idCompeticion = $id");
+  $sql = $con->prepare("SELECT jugadores.nombreJugador, competiciones.idCompeticion, competiciones.nombreEvento FROM inscripciones (INNER JOIN jugadores ON inscripciones.idJugadorFK = jugadores.idJugador) WHERE idCompeticionFK = $id");
   $sql->execute();
 
   while ($row = $sql->fetchAll(PDO::FETCH_ASSOC)) {

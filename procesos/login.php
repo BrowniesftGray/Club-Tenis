@@ -28,7 +28,7 @@ session_start();
     <script type="text/javascript" src="../jquery-ui/jquery-ui.js"></script>
     <script src="../script/index.js"></script>
     <style>
-      .container{
+      .form{
         margin-top: 4%;
       }
     </style>
@@ -94,7 +94,7 @@ session_start();
                     # code...
                     ?>
                   <!-- Quitar si se conecta alguien only-->
-                  <li><a class="dropdown-item" href="procesos/login.php">Conectarse</a></li>
+                  <li><a class="dropdown-item" href="login.php">Conectarse</a></li>
                   <li><a class="dropdown-item" href="#" id="Registro">Registrarse</a></li>
 
                   <?php
@@ -104,7 +104,7 @@ session_start();
 
                     <!-- Admins only-->
                   <li><a class="dropdown-item" id="altaUsuario" href="#">Alta de Usuario</a></li>
-                  <li><a class="dropdown-item" id="modificacionUsuario" href="procesos/editarUsuario.php">Modificación de Usuario</a></li>
+                  <li><a class="dropdown-item" id="modificacionUsuario" href="editarUsuario.php">Modificación de Usuario</a></li>
                     <?php
                   }
 
@@ -162,7 +162,7 @@ session_start();
     }
 
   ?>
-        <div class="container">
+        <div class="container form">
         <form class="form-horizontal" role="form" method="POST">
             <div class="row">
                 <div class="col-md-3"></div>
