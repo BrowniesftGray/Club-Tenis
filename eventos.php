@@ -143,14 +143,14 @@ session_start();
         <div class="col-md-12">
           <h1 class="my-4">
             Eventos Deportivos
-            <a href="procesos/nuevaCompeticion.php" class="btn btn-info">Nueva Competición</a>
+            <a href="procesos/nuevaCompeticion.php" class="btn btn-success">Nueva Competición</a>
+            <a href="procesos/nuevoTransporte.php" class="btn btn-info btn-sm">Añadir Transporte</a>
           </h1>
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
                 <th>Nombre de Evento</th>
                 <th>Fecha de Comienzo</th>
-                <th>Transporte</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -182,10 +182,18 @@ session_start();
                   echo $rows[$i]['fechaEvento'];
                   echo "</td>";
                   echo "<td>";
-                  echo "Botón para acceder a listados de los transportes de la competición.";
-                  echo "</td>";
-                  echo "<td>";
-                  echo "Boton para acceder a inscripción o borrarse.";
+                  $date = date("Y-m-d");
+                  $idCompeticion = $rows[$i]['idCompeticion'];
+                    if ($rows[$i]['fechaEvento'] >= $date) {
+                      echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                      echo "Inscripcion";
+                      echo "</a>";
+                    }
+                    else{
+                      echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                      echo "Resultados";
+                      echo "</a>";
+                    }
                   echo "</td>";
                 echo "</tr>";
               }

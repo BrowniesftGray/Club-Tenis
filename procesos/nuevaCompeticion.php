@@ -122,7 +122,7 @@ session_start();
 
     if (isset($_POST["btnCompeticion"])) {
       $nombreEvento = $_POST['txtNombreEvento'];
-      $descripcion = $_POST['txtfechaEvento'];
+      $descripcion = $_POST['txtDescripcion'];
 
       $bValido = true;
       $sError = "";
