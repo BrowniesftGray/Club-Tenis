@@ -12,8 +12,40 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <!-- Site Properties -->
-    <title>Nueva Competición</title>
+    <?php
+
+    if (isset($_GET['idCompeticion'])) {
+      $idCompeticion = $_GET['idCompeticion'];
+          //echo "<script>alert($idCompeticion)</script>";
+          # code...
+    }
+    else{
+      $idCompeticion = $_POST['idCompeticion'];
+
+      //echo "<script>alert($idCompeticion)</script>";
+
+    }
+
+    $usuario = 'root';
+    $contraRoot = '';
+
+    try {
+      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+      $mbd = null;
+    } catch (PDOException $e) {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+
+    $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
+    $nombreEventoSql->execute();
+
+    $row = $nombreEventoSql->fetchAll(PDO::FETCH_ASSOC);
+    $nombreEvento = $row[0]['nombreEvento'];
+
+    echo "<title>".$nombreEvento."</title>";
+
+    ?>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">

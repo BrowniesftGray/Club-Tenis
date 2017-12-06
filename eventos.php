@@ -168,13 +168,16 @@ session_start();
               }
 
               //Realización de
-              $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento");
+              $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento DESC");
               $sql->execute();
 
               $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
 
               for ($i=0; $i < count($rows); $i++) {
-                echo "<tr>";
+                $date = date("Y-m-d");
+                $idCompeticion = $rows[$i]['idCompeticion'];
+                if ($rows[$i]['fechaEvento'] >= $date) {
+                echo "<tr class='table-info'>";
                   echo "<td>";
                   echo $rows[$i]['nombreEvento'];
                   echo "</td>";
@@ -182,20 +185,27 @@ session_start();
                   echo $rows[$i]['fechaEvento'];
                   echo "</td>";
                   echo "<td>";
-                  $date = date("Y-m-d");
-                  $idCompeticion = $rows[$i]['idCompeticion'];
-                    if ($rows[$i]['fechaEvento'] >= $date) {
-                      echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                      echo "Inscripcion";
-                      echo "</a>";
-                    }
-                    else{
-                      echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                      echo "Resultados";
-                      echo "</a>";
-                    }
+                  echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                  echo "Inscripcion";
+                  echo "</a>";
                   echo "</td>";
                 echo "</tr>";
+                }
+                else{
+                  echo "<tr class='table-danger'>";
+                    echo "<td>";
+                    echo $rows[$i]['nombreEvento'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $rows[$i]['fechaEvento'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                    echo "Resultados";
+                    echo "</a>";
+                    echo "</td>";
+                  echo "</tr>";
+                }
               }
               ?>
             </tbody>
