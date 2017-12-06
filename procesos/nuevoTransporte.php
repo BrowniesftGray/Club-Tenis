@@ -210,7 +210,7 @@ session_start();
                     <button type="submit" class="btn btn-success" name="btnTransporte">Añadir Transporte</button>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php">Volver al Indice</button>
+                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../eventos.php">Volver a Eventos</button>
                 </div>
             </div>
         </form>
