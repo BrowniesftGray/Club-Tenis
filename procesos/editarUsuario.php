@@ -61,7 +61,6 @@ session_start();
                 <div class="form-group has-danger">
                     <label class="sr-only" for="email">Usuario</label>
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                         <select class="form-control" name="elegirUsuario">
                           <?php
                           $usuario = 'root';
@@ -84,6 +83,8 @@ session_start();
                           for ($i=0; $i < count($row); $i++) {
                             echo '<option value="'.$row[$i]["emailUsuario"].'">';
                             echo $row[$i]['nombre'];
+                            echo " - ";
+                            echo $row[$i]['tipoPerfil'];
                             echo "</option>";
                           }
                           ?>
@@ -134,7 +135,7 @@ session_start();
 
     //print_r($_SESSION);
     if ($tipo == 'Administrador' && $email != $_SESSION['email']) {
-        echo "Un usuario administrador solo puede modificarse a si mismo.";
+      echo '<div class="alert alert-warning alert-dismissable" role="alert">Un usuario administrador no puede modificar a otros.</div>';
     }
     else{
 

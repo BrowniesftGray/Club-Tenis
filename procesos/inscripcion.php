@@ -263,7 +263,7 @@ session_start();
             }
           }
           else{
-            echo '<div class="alert alert-warning alert-dismissable" role="alert">No hay comentarios de otros jugadores.</div>';
+            echo '<br><div class="alert alert-info alert-dismissable" role="alert">No hay comentarios de otros jugadores.</div>';
           }
             ?>
           </div>
