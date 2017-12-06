@@ -40,11 +40,22 @@ session_start();
 
   if ($_SESSION['tipo'] == 'Administrador') {
 
-    $idCompeticion = $_GET['idCompeticion'];
+    if (isset($_GET['idCompeticion'])) {
+      $idCompeticion = $_GET['idCompeticion'];
+          //echo "<script>alert($idCompeticion)</script>";
+          # code...
+    }
+    else{
+      $idCompeticion = $_POST['idCompeticion'];
 
+      //echo "<script>alert($idCompeticion)</script>";
 
-    if (isset($_POST["btnCompeticion"])) {
-      $nombreEvento = $_POST['txtNombreEvento'];
+    }
+    if (isset($_POST['btnBorrarse'])) {
+      include("../php/Borrado/borrarInscripcion.php");
+
+    }
+    if (isset($_POST["btnInscripcion"])) {
       $comentario = $_POST['txtComentario'];
 
       $bValido = true;
@@ -97,7 +108,7 @@ session_start();
           <div class="row">
               <div class="col-md-3"></div>
               <div class="col-md-6">
-                  <h2>Inscripción</h2>
+                  <h2>Borrarse de Competicion</h2>
                   <hr>
               </div>
           </div>
@@ -113,6 +124,7 @@ session_start();
                                   $nombreEvento = $row[0]['nombreEvento'];
                                   echo '<input type="text" name="txtNombreEvento" class="form-control" id="nombreEvento"
                                          placeholder="NombreEvento de prueba" autofocus readonly="true" value="'.$nombreEvento.'">';
+                                  echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'"/>';
                                  ?>
                       </div>
                   </div>
@@ -121,7 +133,7 @@ session_start();
           <div class="row" style="padding-top: 1rem">
               <div class="col-md-3"></div>
               <div class="col-md-4">
-                  <button type="submit" class="btn btn-success" name="btnBorrarse">Borrarse</button>
+                  <button type="submit" class="btn btn-warning" name="btnBorrarse">Borrarse</button>
               </div>
               <div class="col-md-3">
                   <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../eventos.php"> Volver a Eventos</button>
@@ -132,6 +144,16 @@ session_start();
       <?php
     }
     else{
+      if (isset($_GET['idCompeticion'])) {
+        $idCompeticion = $_GET['idCompeticion'];
+            //echo "<script>alert($idCompeticion)</script>";
+      }
+      else{
+        $idCompeticion = $_POST['idCompeticion'];
+
+        //echo "<script>alert($idCompeticion)</script>";
+
+      }
 
       $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
       $nombreEventoSql->execute();
@@ -160,9 +182,12 @@ session_start();
 
                                    <?php
                                     $row = $nombreEventoSql->fetchAll(PDO::FETCH_ASSOC);
-                                    $nombreEvento = $row[0]['nombreEvento'];
+                                    for ($i=0; $i < count($row) ; $i++) {
+                                      $nombreEvento = $row[$i]['nombreEvento'];
+                                    }
                                     echo '<input type="text" name="txtNombreEvento" class="form-control" id="nombreEvento"
                                            placeholder="NombreEvento de prueba" autofocus readonly="true" value="'.$nombreEvento.'">';
+                                           echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'"/>';
                                    ?>
                         </div>
                     </div>
@@ -238,7 +263,7 @@ session_start();
             }
           }
           else{
-            echo "No hay comentarios de otros jugadores";
+            echo '<div class="alert alert-warning alert-dismissable" role="alert">No hay comentarios de otros jugadores.</div>';
           }
             ?>
           </div>
@@ -247,7 +272,7 @@ session_start();
   }
   }
   else{
-    echo "No tiene acceso a esta característica, <a href='login.php'>conéctese</a>.";
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
   }
     ?>
   </div>

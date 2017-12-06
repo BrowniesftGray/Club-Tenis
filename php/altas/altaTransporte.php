@@ -2,6 +2,7 @@
 
   $jugador = $_REQUEST['idJugador'];
   $espacio = $_REQUEST['txtEspacio'];
+  $competicion = $_REQUEST['idCompeticion'];
 
   $usuario = 'root';
   $contraseña = '';
@@ -12,7 +13,7 @@
       print "¡Error!: " . $e->getMessage() . "<br/>";
       die();
   }
-  $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible) VALUES ($jugador, $espacio)");
+  $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($jugador, $espacio, $competicion)");
   $insertJugador->execute();
 
 ?>
