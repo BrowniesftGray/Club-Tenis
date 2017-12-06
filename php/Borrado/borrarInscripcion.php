@@ -15,7 +15,7 @@
   $insertarCompeticion = $con->prepare("DELETE FROM inscripciones WHERE idCompeticionFK = $id AND idJugadorFK = $idJugador");
   $insertarCompeticion->execute();
 
-  $insertarCompeticion = $con->prepare("DELETE FROM transporte WHERE idCompeticionFK = $id AND idJugadorFK = $idJugador");
+  $insertarCompeticion = $con->prepare("UPDATE transporte SET espacioDisponible=espacioDisponible+1 WHERE idCompeticionFK = $id AND idJugadorFK = $idJugador");
   $insertarCompeticion->execute();
 
   echo '<div class="alert alert-warning alert-dismissable" role="alert">Se ha borrado su inscripcion.</div>';

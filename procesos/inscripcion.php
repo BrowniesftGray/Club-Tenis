@@ -128,7 +128,7 @@ session_start();
 
     $cuenta = $sql->rowCount();
 
-    if ($cuenta==1) {
+    if ($cuenta>=1) {
 
       $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
       $nombreEventoSql->execute();
@@ -190,7 +190,7 @@ session_start();
       $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
       $nombreEventoSql->execute();
 
-      $transporteSql = $con->prepare("SELECT * FROM transporte INNER JOIN jugadores ON transporte.idJugadorFK=jugadores.idJugador WHERE idCompeticionFK=$idCompeticion");
+      $transporteSql = $con->prepare("SELECT * FROM transporte INNER JOIN jugadores ON transporte.idJugadorFK=jugadores.idJugador WHERE idCompeticionFK=$idCompeticion AND espacioDisponible > 0");
       $transporteSql->execute();
 
       $comentariosSql = $con->prepare("SELECT * FROM inscripciones INNER JOIN jugadores ON inscripciones.idJugadorFK=jugadores.idJugador WHERE idCompeticionFK=$idCompeticion");
@@ -235,13 +235,16 @@ session_start();
                               <?php
                               $cuenta = $transporteSql->rowCount();
 
-                              if ($cuenta>1) {
-                              $row = $transporteSql->fetchAll(PDO::FETCH_ASSOC);
+                              if ($cuenta>0) {
+                                $row = $transporteSql->fetchAll(PDO::FETCH_ASSOC);
 
                                 //Parte de borrarse de la competición
                               for ($i=0; $i < count($row); $i++) {
                                 echo '<option value="'.$row[$i]["idTransporte"].'">';
+                                echo "Jugador: ";
                                 echo $row[$i]['nombreJugador'];
+                                echo "  | Espacio disponible: ";
+                                echo $row[$i]['espacioDisponible'];
                                 echo "</option>";
                               }
                             }

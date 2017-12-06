@@ -1,8 +1,8 @@
 <?php
 
-  $jugador = $_REQUEST['idJugador'];
+  $jugador = $_SESSION['idJugador'];
   $espacio = $_REQUEST['txtEspacio'];
-  $competicion = $_REQUEST['idCompeticion'];
+  $competicion = $_REQUEST['elegirCompeticion'];
 
   $usuario = 'root';
   $contraseña = '';
@@ -15,5 +15,7 @@
   }
   $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($jugador, $espacio, $competicion)");
   $insertJugador->execute();
+
+  echo '<div class="alert alert-success alert-dismissable" role="alert">Se ha añdido el transporte.</div>';
 
 ?>

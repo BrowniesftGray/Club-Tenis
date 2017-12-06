@@ -13,7 +13,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Nueva Competición</title>
+    <title>Nueva Transporte</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -35,7 +35,9 @@ session_start();
     <script type="text/javascript">
     $( function() {
       $( "#txtfechaEvento" ).datepicker({dateFormat: 'yy-mm-dd'});
+      $( "#txtEspacio" ).spinner();
     } );
+
     </script>
 </head>
 <body>
@@ -120,27 +122,14 @@ session_start();
 
   if ($_SESSION['tipo'] == 'Administrador') {
 
-    if (isset($_POST["btnCompeticion"])) {
-      $nombreEvento = $_POST['txtNombreEvento'];
-      $descripcion = $_POST['txtDescripcion'];
+    if (isset($_POST["btnTransporte"])) {
+      $espacio = $_POST['txtEspacio'];
 
       $bValido = true;
       $sError = "";
 
-      if (preg_match("/^[a-zA-z\s\ñ\Ñ\w\d\D]{5,45}$/",$nombreEvento)) {
-      }
-        else{
-
-        $sError .= "El título requiere de al menos 5 caracteres.<br>";
-        $bValido = false;
-
-      }
-
-      if (preg_match("/^[a-zA-z\s\ñ\Ñ\w\d\D]{5,2000}$/", $descripcion)) {
-      }
-        else{
-
-        $sError .= "La descripcion debe tener una longitud mínima de 5 caracteres y un máximo de 2000.";
+      if ($espacio == "") {
+        $sError .= "El espacio debe tener algún número.<br>";
         $bValido = false;
       }
 
@@ -148,7 +137,7 @@ session_start();
         echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>'.$sError.'</div>';
       }
       else{
-        include("../php/altas/altaCompeticion.php");
+        include("../php/altas/altaTransporte.php");
       }
     }
 
@@ -158,7 +147,7 @@ session_start();
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <h2>Añadir Competición</h2>
+                    <h2>Añadir Transporte</h2>
                     <hr>
                 </div>
             </div>
@@ -166,10 +155,9 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtNombreEvento">NombreEvento</label>
+                        <label class="sr-only" for="txtEspacio">Espacio</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="text" name="txtNombreEvento" class="form-control" id="nombreEvento"
-                                   placeholder="NombreEvento de prueba" autofocus>
+                            <input type="number" name="txtEspacio" class="form-control" value="0" autofocus>
                         </div>
                     </div>
                 </div>
@@ -178,33 +166,45 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="sr-only" for="txtfechaEvento">Fecha de Evento</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="text" name="txtfechaEvento" class="form-control" id="txtfechaEvento"
-                                   placeholder="fechaEvento">
+                          <select class="form-control" name="elegirCompeticion">
+                            <?php
+                            $usuario = 'root';
+                            $contraRoot = '';
+
+                            try {
+                              $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+                              $mbd = null;
+                            } catch (PDOException $e) {
+                                print "¡Error!: " . $e->getMessage() . "<br/>";
+                                die();
+                            }
+
+                            $date = date("Y-m-d");
+                            //Realización de
+                            $sql = $con->prepare("SELECT * FROM competiciones WHERE fechaEvento >= '".$date."'");
+                            $sql->execute();
+
+                            $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                            for ($i=0; $i < count($row); $i++) {
+                              echo '<option value="'.$row[$i]["idCompeticion"].'">';
+                              echo $row[$i]['nombreEvento'];
+                              echo "</option>";
+                            }
+                            ?>
+                          </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-              <div class="col-md-3"></div>
-              <div class="col-md-6">
-                <div class="form-group">
-                    <label class="sr-only" for="txtDescripcion">Descripcion</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <textarea name="txtDescripcion" class="form-control" id="txtDescripcion"
-                               placeholder="Descripcion" rows="6"></textarea>
-                    </div>
-                </div>
-              </div>
-            </div>
             <div class="row" style="padding-top: 1rem">
                 <div class="col-md-3"></div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-success" name="btnCompeticion">Añadir Competición </button>
+                    <button type="submit" class="btn btn-success" name="btnTransporte">Añadir Transporte</button>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
+                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php">Volver al Indice</button>
                 </div>
             </div>
         </form>

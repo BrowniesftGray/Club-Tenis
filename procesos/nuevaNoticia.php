@@ -120,10 +120,10 @@ session_start();
             <div class="row" style="padding-top: 1rem">
                 <div class="col-md-3"></div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-success" name="btnNoticia">Añadir Noticia <i class="fa fa-plus-square"></i></button>
+                    <button type="submit" class="btn btn-success" name="btnNoticia">Añadir Noticia </button>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"><i class="fa fa-undo"></i> Volver al Indice</button>
+                    <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
                 </div>
             </div>
         </form>

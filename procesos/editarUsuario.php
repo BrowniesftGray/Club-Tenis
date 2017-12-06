@@ -99,7 +99,7 @@ session_start();
                 <button type="submit" class="btn btn-success" name="btnUsuario">Seleccionar Usuario</button>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"><i class="fa fa-undo"></i> Volver al Indice</button>
+                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
             </div>
         </div>
     </form>
@@ -252,7 +252,7 @@ session_start();
                 <button type="submit" class="btn btn-success" name="btnActualizar">Actualizar Usuario</button>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"><i class="fa fa-undo"></i> Volver al Indice</button>
+                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
             </div>
         </div>
     </form>
