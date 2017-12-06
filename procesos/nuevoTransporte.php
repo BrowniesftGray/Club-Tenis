@@ -133,6 +133,12 @@ session_start();
         $bValido = false;
       }
 
+      if ($espacio == 0) {
+        $sError .= "El espacio debe ser distinto de 0.<br>";
+        $bValido = false;
+      }
+
+
       if ($bValido == false) {
         echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>'.$sError.'</div>';
       }
@@ -157,7 +163,7 @@ session_start();
                     <div class="form-group has-danger">
                         <label class="sr-only" for="txtEspacio">Espacio</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="number" name="txtEspacio" class="form-control" value="0" autofocus>
+                            <input type="number" name="txtEspacio" class="form-control" value="1" autofocus>
                         </div>
                     </div>
                 </div>
