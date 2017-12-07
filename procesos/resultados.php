@@ -291,8 +291,10 @@ session_start();
 
     for ($i=0; $i < count($participantes); $i++) {
       $participante = $participantes[$i];
+
       $victorias = $con->prepare("SELECT COUNT(idGanador) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idGanador = $participante");
       $victorias->execute();
+
       $derrotas = $con->prepare("SELECT COUNT(idPerdedor) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idPerdedor = $participante");
       $derrotas->execute();
 
@@ -310,8 +312,8 @@ session_start();
       $row = $nombreJugador->fetchAll(PDO::FETCH_ASSOC);
       $data[$i]['Nombre'] = $row[0]['nombreJugador'];
 
-
     }
+    
     array_multisort($data, SORT_DESC);
     for ($i=0; $i < count($data); $i++) {
       echo "<tr>";
