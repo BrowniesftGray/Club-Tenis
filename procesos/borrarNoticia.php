@@ -62,16 +62,7 @@ session_start();
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
                                    <?php
-                                     $usuario = 'root';
-                                     $contraRoot = '';
-
-                                     try {
-                                       $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-                                       $mbd = null;
-                                     } catch (PDOException $e) {
-                                         print "¡Error!: " . $e->getMessage() . "<br/>";
-                                         die();
-                                     }
+                                     $con = conexion();
 
                                      //Realización de
                                      $idNoticia = $_GET['idNoticia'];
@@ -120,6 +111,20 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button><a href="login.php>"conéctese</a>';
+  }
+
+  function conexion(){
+    $usuario = 'root';
+    $contraRoot = '';
+
+    try {
+      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+      $mbd = null;
+    } catch (PDOException $e) {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+    return $con;
   }
     ?>
 </body>

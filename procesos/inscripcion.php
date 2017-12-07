@@ -26,16 +26,7 @@ session_start();
 
     }
 
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
+    $con = conexion();
 
     $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
     $nombreEventoSql->execute();
@@ -110,16 +101,7 @@ session_start();
       }
     }
 
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
+    $con = conexion();
 
     //Realización de
     $jugador = $_SESSION['idJugador'];
@@ -308,6 +290,20 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+  }
+
+  function conexion(){
+    $usuario = 'root';
+    $contraRoot = '';
+
+    try {
+      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+      $mbd = null;
+    } catch (PDOException $e) {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+    return $con;
   }
     ?>
   </div>

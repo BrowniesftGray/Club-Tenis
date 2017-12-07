@@ -63,16 +63,7 @@ session_start();
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <select class="form-control" name="elegirUsuario">
                           <?php
-                          $usuario = 'root';
-                          $contraRoot = '';
-
-                          try {
-                            $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-                            $mbd = null;
-                          } catch (PDOException $e) {
-                              print "¡Error!: " . $e->getMessage() . "<br/>";
-                              die();
-                          }
+                          $con = conexion();
 
                           //Realización de
                           $sql = $con->prepare("SELECT * FROM usuarios");
@@ -115,16 +106,7 @@ session_start();
       $email = $_POST['txtEmail'];
     }
 
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
+    $con = conexion();
 
     $sql2 = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='".$email."'");
     $sql2->execute();
@@ -263,6 +245,20 @@ session_start();
 }
 else{
   echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+}
+
+function conexion(){
+  $usuario = 'root';
+  $contraRoot = '';
+
+  try {
+    $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+    $mbd = null;
+  } catch (PDOException $e) {
+      print "¡Error!: " . $e->getMessage() . "<br/>";
+      die();
+  }
+  return $con;
 }
   ?>
 </body>

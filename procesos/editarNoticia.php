@@ -64,16 +64,7 @@ session_start();
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
                                    <?php
-                                     $usuario = 'root';
-                                     $contraRoot = '';
-
-                                     try {
-                                       $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-                                       $mbd = null;
-                                     } catch (PDOException $e) {
-                                         print "¡Error!: " . $e->getMessage() . "<br/>";
-                                         die();
-                                     }
+                                     $con = conexion();
 
                                      //Realización de
                                      $idNoticia = $_GET['idNoticia'];
@@ -135,6 +126,20 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+  }
+
+  function conexion(){
+    $usuario = 'root';
+    $contraRoot = '';
+
+    try {
+      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+      $mbd = null;
+    } catch (PDOException $e) {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }
+    return $con;
   }
     ?>
 </body>
