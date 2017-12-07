@@ -1,9 +1,10 @@
 <?php
 
-  $ganador = $_REQUEST['txtParticipante1'];
-  $perdedor = $_REQUEST['txtParticipante2'];
+  $resultado = $_REQUEST['elegirResultado'];
+  $contrincante = $_REQUEST['elegirContrincante'];
   $competicion = $_REQUEST['idCompeticion'];
-  $partido = $_REQUEST['idPartido'];
+  $fase = $_REQUEST['numFase'];
+  $jugador = $_SESSION['idJugador'];
 
   $usuario = 'root';
   $contraseña = '';
@@ -14,7 +15,14 @@
       print "¡Error!: " . $e->getMessage() . "<br/>";
       die();
   }
-  $insertJugador = $con->prepare("INSERT INTO resultados (idPartidoFK, idPerdedor, idGanador, idCompeticionFK) VALUES ($partido, $ganador, $perdedor, $competicion)");
-  $insertJugador->execute();
+
+  if ($resultado == 0) {
+    # code...
+    $insertarResultado = $con->prepare("INSERT INTO resultados (idPerdedor, idGanador, idCompeticionFK, Fase) VALUES ($contrincante, $jugador, $competicion, $fase)");
+  }
+  else{
+    $insertarResultado = $con->prepare("INSERT INTO resultados (idPerdedor, idGanador, idCompeticionFK, Fase) VALUES ($jugador, $contrincante,$competicion, $fase)");
+  }
+  $insertarResultado->execute();
 
 ?>

@@ -26,16 +26,7 @@ session_start();
 
     }
 
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
+    $con = conexion();
 
     $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
     $nombreEventoSql->execute();
@@ -72,18 +63,14 @@ session_start();
   if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST["btnTransporte"])) {
-      $espacio = $_POST['txtEspacio'];
+      $espacio = $_POST['elegirContrincante'];
 
       $bValido = true;
       $sError = "";
 
-      if ($espacio == "") {
-        $sError .= "El espacio debe tener algún número.<br>";
-        $bValido = false;
-      }
 
       if ($espacio == 0) {
-        $sError .= "El espacio debe ser distinto de 0.<br>";
+        $sError .= "No hay contrincantes disponibles para colocar resultados.<br>";
         $bValido = false;
       }
 
@@ -96,8 +83,84 @@ session_start();
       }
     }
 
+    $con = conexion();
+
+    $jugador = $_SESSION['idJugador'];
+    $comprobarFase = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $jugador OR idPerdedor = $jugador) ORDER BY Fase");
+    $comprobarFase->execute();
+
+    $row = $comprobarFase->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($row) == 0) {
+      $fase = "Preliminares";
+      $numFase = 1;
+    }
+    else{
+      $fase = $row[0]['Fase'];
+
+      switch ($fase) {
+        case 1:
+          $numFase = 2;
+          $fase = "Dieciseisavos";
+          break;
+
+        case 2:
+          $numFase = 3;
+          $fase = "Octavos";
+          break;
+
+        case 3:
+          $numFase = 4;
+          $fase = "SemiFinal";
+          break;
+
+        case 4:
+          $fase = "Final";
+          $numFase = 5;
+          break;
+      }
 
 
+      if ($row[0]['idPerdedor'] == $jugador) {
+        $meterResultado = false;
+      }
+      else{
+        $meterResultado = true;
+      }
+    }
+
+    $conseguirContrincante = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND NOT idJugadorFK = $jugador");
+    $conseguirContrincante->execute();
+    $row = $conseguirContrincante->fetchAll(PDO::FETCH_ASSOC);
+
+    $contrincantes = array();
+    for ($i=0; $i < count($row); $i++) {
+      $idContrincante = $row[$i]['idJugadorFK'];
+
+      $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
+      $comprobarContrincante->execute();
+      //print_r($comprobarContrincante);
+
+      $oponentes = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
+
+      if (count($oponentes) == 0) {
+        $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase-1 ORDER BY Fase");
+        $comprobarContrincante->execute();
+        $perdedorOponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($perdedorOponente[0]['idPerdedor'] != $idContrincante) {
+
+
+        $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
+        $nombreContrincante->execute();
+        $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
+        $nombreC = $nombreLista[0]['nombreJugador'];
+        $contrincantes[$i]['idContrincante'] = $idContrincante;
+        $contrincantes[$i]['nombreContrincante'] = $nombreC;
+      }
+
+      }
+    }
   ?>
         <div class="container form">
         <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
@@ -109,12 +172,30 @@ session_start();
                 </div>
             </div>
             <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="sr-only" for="txtEspacio">Fase</label>
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <?php
+                    echo '<input type="text" name="txtNombreFase" class="form-control" id="nombreEvento" value="'.$fase.'" readonly="true">';
+                    echo '<input type="hidden" name="numFase" value="'.$numFase.'">'
+
+                    ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtEspacio">Espacio</label>
+                        <label class="sr-only" for="txtEspacio">Resultado</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="number" name="txtEspacio" class="form-control" value="1" autofocus>
+                          <select class="form-control" name="elegirResultado">
+                            <option value="0">Victoria</option>
+                            <option value="1">Derrota</option>
+                          </select>
                         </div>
                     </div>
                 </div>
@@ -124,24 +205,26 @@ session_start();
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <select class="form-control" name="elegirCompeticion">
+                          <select class="form-control" name="elegirContrincante">
                             <?php
 
-                            $con = conexion();
-                            $date = date("Y-m-d");
-                            //Realización de
-                            $sql = $con->prepare("SELECT * FROM competiciones WHERE fechaEvento >= '".$date."'");
-                            $sql->execute();
-
-                            $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                            for ($i=0; $i < count($row); $i++) {
-                              echo '<option value="'.$row[$i]["idCompeticion"].'">';
-                              echo $row[$i]['nombreEvento'];
+                            if (count($contrincantes) == 0) {
+                              echo "<option value='0'> No hay contrincantes</option>";
+                            }
+                            else{
+                            for ($i=0; $i < count($contrincantes); $i++) {
+                              echo '<option value="'.$contrincantes[$i]["idContrincante"].'">';
+                              echo $contrincantes[$i]['nombreContrincante'];
                               echo "</option>";
                             }
+                          }
                             ?>
                           </select>
+
+                          <?php
+                          //print_r($contrincantes);
+                          echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'">'
+                          ?>
                         </div>
                     </div>
                 </div>
@@ -149,7 +232,7 @@ session_start();
             <div class="row" style="padding-top: 1rem">
                 <div class="col-md-3"></div>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-success" name="btnTransporte">Añadir Transporte</button>
+                    <button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../eventos.php">Volver a Eventos</button>
