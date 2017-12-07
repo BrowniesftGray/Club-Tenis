@@ -82,8 +82,16 @@ session_start();
         include("../php/altas/altaResultado.php");
       }
     }
-
     $con = conexion();
+
+    $jugador = $_SESSION['idJugador'];
+    $comprorbarInscripcion = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND idJugadorFK = $jugador");
+    $comprorbarInscripcion->execute();
+    $comprobarI = $comprorbarInscripcion->fetchAll(PDO::FETCH_ASSOC);
+    $cuenta = count($comprobarI);
+
+    if ($cuenta == 1) {
+      # code...
 
     $jugador = $_SESSION['idJugador'];
     $comprobarFase = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $jugador OR idPerdedor = $jugador) ORDER BY Fase");
@@ -243,7 +251,12 @@ session_start();
     <?php
   }
   else{
-    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
+
+  }
+  }
+  else{
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
   }
 
   function conexion(){
