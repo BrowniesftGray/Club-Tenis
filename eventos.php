@@ -147,10 +147,16 @@ session_start();
               if ($_SESSION['tipo'] == "Administrador") {
             ?>
             <a href="procesos/nuevaCompeticion.php" class="btn btn-success">Nueva Competición</a>
+            <?php
+          }
+          if ($_SESSION['tipo'] != "") {
+            # code...
+          
+          ?>
             <a href="procesos/nuevoTransporte.php" class="btn btn-info btn-sm">Añadir Transporte</a>
             <?php
-            } 
-          ?>
+          }
+            ?>
           </h1>
           <table class="table table-hover table-bordered">
             <thead>
