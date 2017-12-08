@@ -25,6 +25,7 @@ session_start();
     <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
     <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     <script src="script/index.js"></script>
+    
 
     <style>
       .cerrarSesion{
