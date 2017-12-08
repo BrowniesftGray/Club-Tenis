@@ -77,10 +77,10 @@ session_start();
                   Listados
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" id="listadoSocios" href="#">Listado de socios</a></li>
-                  <li><a class="dropdown-item" id="listadoEventos" href="#">Listado de eventos</a></li>
-                  <li><a class="dropdown-item" id="listadosInscritos" href="#">Listado de inscritos a un evento</a></li>
-                  <li><a class="dropdown-item" id="listadoResultados" href="#">Listado de resultados de un evento</a></li>
+                  <li><a class="dropdown-item" id="listadoSocios" href="listados.php?Socios=1">Listado de socios</a></li>
+                  <li><a class="dropdown-item" id="listadoEventos" href="listados.php?Eventos=1">Listado de eventos</a></li>
+                  <li><a class="dropdown-item" id="listadosInscritos" href="listados.php?Inscritos=1">Listado de inscritos a un evento</a></li>
+                  <li><a class="dropdown-item" id="listadoResultados" href="listados.php?Evento=1">Listado de resultados de un evento</a></li>
                 </ul>
             </li>
             <?php

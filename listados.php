@@ -32,9 +32,6 @@ session_start();
         width: 80%;
       }
 
-      th,td{
-        text-align: center;
-      }
     </style>
 
   </head>
@@ -63,13 +60,13 @@ session_start();
         </button>
         <div class="collapse navbar-collapse" >
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.php">Inicio
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Inicio
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Eventos Deportivos</a>
+            <li class="nav-item">
+              <a class="nav-link" href="eventos.php">Eventos Deportivos</a>
             </li>
             <!-- Solo para admins, se abren en una pestaña nueva lista para imprimir o guardar en pdf-->
             <?php
@@ -134,98 +131,14 @@ session_start();
     </nav>
 <div id="formularios"></div>
 <div id="divMensajes"><p id="pMensaje"></p></div>
-    <!-- Page Content -->
-    <div class="container">
+<div class="container">
 
-      <div class="row">
+  <div class="row">
 
-        <!-- Blog Entries Column -->
-        <div class="col-md-12">
-          <h1 class="my-4">
-            Eventos Deportivos
-            <?php
-              if ($_SESSION['tipo'] == "Administrador") {
-            ?>
-            <a href="procesos/nuevaCompeticion.php" class="btn btn-success">Nueva Competición</a>
-            <?php
-          }
-          if ($_SESSION['tipo'] != "") {
-            # code...
+    <!-- Blog Entries Column -->
+    <div class="col-md-8">
 
-          ?>
-            <a href="procesos/nuevoTransporte.php" class="btn btn-info btn-sm">Añadir Transporte</a>
-            <?php
-          }
-            ?>
-          </h1>
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Nombre de Evento</th>
-                <th>Fecha de Comienzo</th>
-                <th>Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $usuario = 'root';
-              $contraRoot = '';
-
-              try {
-                $con = new PDO('mysql:host=localhost;dbname=club;charset=utf8', $usuario, $contraRoot);
-                $mbd = null;
-              } catch (PDOException $e) {
-                  print "¡Error!: " . $e->getMessage() . "<br/>";
-                  die();
-              }
-
-              //Realización de
-              $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento DESC");
-              $sql->execute();
-
-              $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-              for ($i=0; $i < count($rows); $i++) {
-                $date = date("Y-m-d");
-                $idCompeticion = $rows[$i]['idCompeticion'];
-                if ($rows[$i]['fechaEvento'] >= $date) {
-                echo "<tr class='table-info'>";
-                  echo "<td>";
-                  echo $rows[$i]['nombreEvento'];
-                  echo "</td>";
-                  echo "<td>";
-                  echo $rows[$i]['fechaEvento'];
-                  echo "</td>";
-                  echo "<td>";
-                  echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                  echo "Inscripcion";
-                  echo "</a>";
-                  echo "</td>";
-                echo "</tr>";
-                }
-                else{
-                  echo "<tr class='table-danger'>";
-                    echo "<td>";
-                    echo $rows[$i]['nombreEvento'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo $rows[$i]['fechaEvento'];
-                    echo "</td>";
-                    echo "<td>";
-                    echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                    echo "Resultados";
-                    echo "</a>";
-                    echo "</td>";
-                  echo "</tr>";
-                }
-              }
-              ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <h1 class="my-4">Noticias</h1>
     </div>
-
-  </body>
-
-</html>
+  </div>
+</div>
