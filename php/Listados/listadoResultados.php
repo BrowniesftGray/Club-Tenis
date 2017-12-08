@@ -1,15 +1,11 @@
 <?php
 
-if (!isset($_POST['btnAceptar'])) {
-
-}
-else{
   $idCompeticion = $_REQUEST['IdEvento'];
   $usuario = 'root';
   $contraseña = '';
 
   try {
-    $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraseña);
+    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
     $mbd = null;
   } catch (PDOException $e) {
       print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -65,7 +61,7 @@ else{
 
     $nombreJugador = $con->prepare("SELECT nombreJugador FROM jugadores WHERE idJugador = $participante");
     $nombreJugador->execute();
-    
+
     $row = $victorias->fetchAll(PDO::FETCH_ASSOC);
     $data[$i]['Victorias'] = $row[0]['COUNT(idGanador)'];
 
@@ -93,5 +89,4 @@ else{
   }
   echo "</table></div>";
 
-}
 ?>

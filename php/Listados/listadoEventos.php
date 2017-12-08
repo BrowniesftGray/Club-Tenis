@@ -3,7 +3,7 @@
 $usuario = 'root';
 $contraseña = '';
 try {
-  $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraseña);
+  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
   $mbd = null;
 } catch (PDOException $e) {
     print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -11,8 +11,9 @@ try {
 }
 
   //Realización de
-  $sql = $con->prepare("SELECT * FROM eventos");
+  $sql = $con->prepare("SELECT * FROM Competiciones");
   $sql->execute();
+  //print_r($sql);
 
   while ($row = $sql->fetchAll(PDO::FETCH_ASSOC)) {
     //Se almacena en un array las filas que se vaya leyendo

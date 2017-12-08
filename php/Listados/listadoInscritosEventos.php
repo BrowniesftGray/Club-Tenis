@@ -1,15 +1,9 @@
 <?php
-
-  if (!isset($_POST['btnAceptar'])) {
-
-  }
-  else{
-
-  $id = $_POST['txtIdEvento'];
+  $id = $_REQUEST['IdEvento'];
   $usuario = 'root';
   $contraseña = '';
   try {
-    $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraseña);
+    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
     $mbd = null;
   } catch (PDOException $e) {
       print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -17,7 +11,7 @@
   }
 
   //Realización de
-  $sql = $con->prepare("SELECT jugadores.nombreJugador, competiciones.idCompeticion, competiciones.nombreEvento FROM inscripciones (INNER JOIN jugadores ON inscripciones.idJugadorFK = jugadores.idJugador) WHERE idCompeticionFK = $id");
+  $sql = $con->prepare("SELECT jugadores.nombreJugador, competiciones.nombreEvento FROM inscripciones INNER JOIN competiciones ON inscripciones.idCompeticionFK = competiciones.idCompeticion INNER JOIN jugadores ON inscripciones.idJugadorFK = jugadores.idJugador WHERE idCompeticionFK = $id");
   $sql->execute();
 
   while ($row = $sql->fetchAll(PDO::FETCH_ASSOC)) {
@@ -26,5 +20,4 @@
   }
 
   echo json_encode($data);
-}
 ?>

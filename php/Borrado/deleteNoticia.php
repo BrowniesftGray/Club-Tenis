@@ -5,7 +5,7 @@
   $usuario = 'root';
   $contraseña = '';
   try {
-    $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraseña);
+    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
     $mbd = null;
   } catch (PDOException $e) {
       print "¡Error!: " . $e->getMessage() . "<br/>";

@@ -139,6 +139,23 @@ session_start();
     <div class="col-md-8">
 
       <h1 class="my-4">Noticias</h1>
+      <?php
+      if (isset($_GET['Socios'])) {
+        echo "Socio";
+      }
+
+      if (isset($_GET['Eventos'])) {
+        echo "Eventos";
+      }
+
+      if (isset($_GET['Inscritos'])) {
+        echo "Inscritos";
+      }
+
+      if (isset($_GET['Evento'])) {
+        echo "Evento";
+      }
+      ?>
     </div>
   </div>
 </div>

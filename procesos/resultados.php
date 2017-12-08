@@ -313,7 +313,7 @@ session_start();
       $data[$i]['Nombre'] = $row[0]['nombreJugador'];
 
     }
-    
+
     array_multisort($data, SORT_DESC);
     for ($i=0; $i < count($data); $i++) {
       echo "<tr>";
@@ -345,7 +345,7 @@ session_start();
     $contraRoot = '';
 
     try {
-      $con = new PDO('mysql:host=localhost;dbname=club', $usuario, $contraRoot);
+      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
       $mbd = null;
     } catch (PDOException $e) {
         print "¡Error!: " . $e->getMessage() . "<br/>";
