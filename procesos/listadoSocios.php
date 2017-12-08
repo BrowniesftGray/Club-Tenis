@@ -1,45 +1,4 @@
 <?php
-session_name("aplicacion");
-session_start();
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Standard Meta -->
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <?php
-
-    echo "<title>Listado Socios</title>";
-
-    ?>
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../css/blog-home.css" rel="stylesheet">
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
-    <script type="text/javascript" src="../jquery-ui/jquery-ui.js"></script>
-    <script src="../script/index.js"></script>
-    <style>
-      .form{
-        margin-top: 4%;
-      }
-    </style>
-</head>
-<body>
-<?php
-
-include("../php/navbar.php");
 $usuario = 'root';
 $contraseña = '';
 try {
@@ -58,7 +17,7 @@ try {
   $content .= '<style>';
   $content .= '</style>';
   $content .= '</head><body>';
-  $content .= "<div class='container'><div class='row' style='padding-top: 1rem'><table id='exportTable' class='table table-bordered'>";
+  $content .= "<div class='container'><div class='row' style='padding-top: 1rem'><table id='exportTable' class='table table-bordered table-hover'>";
   $content .= "<thead>";
     $content .= "<tr>";
     $content .= "<th>";

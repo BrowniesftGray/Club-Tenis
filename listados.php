@@ -25,7 +25,7 @@ session_start();
     <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
     <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     <script src="script/index.js"></script>
-    
+
 
     <style>
       .cerrarSesion{
@@ -62,7 +62,7 @@ session_start();
         <div class="collapse navbar-collapse" >
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Inicio
+              <a class="nav-link" href="index.php">Inicio
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -139,22 +139,132 @@ session_start();
     <!-- Blog Entries Column -->
     <div class="col-md-8">
 
-      <h1 class="my-4">Noticias</h1>
       <?php
       if (isset($_GET['Socios'])) {
-        echo "Socio";
+        echo '<h1 class="my-4">Listado de Socios</h1>';
+        include("procesos/listadoSocios.php");
       }
 
       if (isset($_GET['Eventos'])) {
-        echo "Eventos";
+        echo '<h1 class="my-4">Listado de Eventos</h1>';
+        include("procesos/listadoEventos.php");
       }
 
       if (isset($_GET['Inscritos'])) {
-        echo "Inscritos";
+        echo '<h1 class="my-4">Listado de Inscritos a Competición</h1>';
+        ?>
+        <div class="container form">
+        <form class="form-horizontal" role="form" method="POST">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <label class="sr-only" for="email">Evento</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <select class="form-control" name="elegirEvento">
+                          <?php
+                          $con = conexion();
+
+                          //Realización de
+                          $sql = $con->prepare("SELECT * FROM competiciones");
+                          $sql->execute();
+
+                          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                          for ($i=0; $i < count($row); $i++) {
+                            echo '<option value="'.$row[$i]["idCompeticion"].'">';
+                            echo $row[$i]['nombreEvento'];
+                            echo " - ";
+                            echo $row[$i]['fechaEvento'];
+                            echo "</option>";
+                          }
+                          ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 1rem">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success" name="btnCompeticion">Seleccionar Competicion</button>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
+            </div>
+        </div>
+      </div>
+        <?php
+      }
+
+      if (isset($_POST['btnCompeticion'])) {
+        include("procesos/listadoResultados.php");
       }
 
       if (isset($_GET['Evento'])) {
-        echo "Evento";
+        echo '<h1 class="my-4">Listado de Resultados de Competición</h1>';
+        ?>
+        <div class="container form">
+        <form class="form-horizontal" role="form" method="POST">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <label class="sr-only" for="email">Evento</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <select class="form-control" name="elegirEvento">
+                          <?php
+                          $con = conexion();
+
+                          //Realización de
+                          $sql = $con->prepare("SELECT * FROM competiciones");
+                          $sql->execute();
+
+                          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                          for ($i=0; $i < count($row); $i++) {
+                            echo '<option value="'.$row[$i]["idCompeticion"].'">';
+                            echo $row[$i]['nombreEvento'];
+                            echo " - ";
+                            echo $row[$i]['fechaEvento'];
+                            echo "</option>";
+                          }
+                          ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 1rem">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success" name="btnCompeticion">Seleccionar Competicion</button>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="index.php"> Volver al Indice</button>
+            </div>
+        </div>
+      </div>
+        <?php
+      }
+
+      if (isset($_POST['btnEvento'])) {
+        include("procesos/listadoInscritos.php");
+      }
+
+
+      function conexion(){
+        $usuario = 'root';
+        $contraRoot = '';
+
+        try {
+          $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
+          $mbd = null;
+        } catch (PDOException $e) {
+            print "¡Error!: " . $e->getMessage() . "<br/>";
+            die();
+        }
+        return $con;
       }
       ?>
     </div>
