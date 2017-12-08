@@ -33,13 +33,13 @@ function comprobarNoticia(){
   var sError = "";
   var bValido = true;
 
-  var expreContra = /^[a-zA-z\s\ñ\Ñ]{5,45}$/
+  var expreContra = /^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,45}$/
   if (expreContra.test(frmNoticia.txtTitulo.value) == false) {
     bValido = false;
     sError+= "Titulo requiere de 5 letras mínimo y tiene un máximo de 45.";
   }
 
-  var expreContra = /^[a-zA-z\s\ñ\Ñ]{5,2000}$/
+  var expreContra = /^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,2000}$/
   if (expreContra.test(frmNoticia.txtDescripcion.value) == false) {
     bValido = false;
     sError+= "Descripcion requiere de 5 letras mínimo y tiene un máximo de 2000.";

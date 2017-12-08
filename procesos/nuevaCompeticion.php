@@ -127,7 +127,7 @@ session_start();
       $bValido = true;
       $sError = "";
 
-      if (preg_match("/^[a-zA-z\s\ñ\Ñ\w\d\D]{5,45}$/",$nombreEvento)) {
+      if (preg_match("/^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,45}$/",$nombreEvento)) {
       }
         else{
 
@@ -136,7 +136,7 @@ session_start();
 
       }
 
-      if (preg_match("/^[a-zA-z\s\ñ\Ñ\w\d\D]{5,2000}$/", $descripcion)) {
+      if (preg_match("/^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,2000}$/", $descripcion)) {
       }
         else{
 

@@ -39,19 +39,19 @@ function comprobarUsuarioAdmin(){
     sError+= "Ingrese un email con formato correcto";
   }
 
-  var expreContra = /^[a-zA-z\s\ñ\Ñ\w\d\D]{5,45}$/
+  var expreContra = /^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,45}$/
   if (expreContra.test(frmUsuarioAdmin.txtNombre.value) == false) {
     bValido = false;
     sError+= "Nombre requiere de 5 letras mínimo y tiene un máximo de 45.";
   }
 
-  var expreContra = /^[a-zA-z\s\ñ\Ñ\w\d\D]{5,45}$/
+  var expreContra = /^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,45}$/
   if (expreContra.test(frmUsuarioAdmin.txtContra.value) == false) {
     bValido = false;
     sError+= "La contraseña requiere de 5 letras mínimo y tiene un máximo de 45.";
   }
 
-  var expreContra = /^[a-zA-z\s\ñ\Ñ\w\d\D]{8,45}$/
+  var expreContra = /^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{8,45}$/
   if (expreContra.test(frmUsuarioAdmin.txtDireccion.value) == false) {
     bValido = false;
     sError+= "La direccion debe constar de 8 letras mínimo y tiene un máximo de 45.";

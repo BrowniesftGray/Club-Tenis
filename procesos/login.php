@@ -65,7 +65,7 @@ session_start();
 
       }
 
-      if (preg_match("/^[a-zA-z\s\ñ\Ñ]{5,45}$/", $contra)) {
+      if (preg_match("/^[a-zA-Z\ñ\Ñ\w\d\D\s\S]{5,45}$/", $contra)) {
         $sError = "";
       }
       else{
