@@ -152,106 +152,14 @@ session_start();
 
       if (isset($_GET['Inscritos'])) {
         echo '<h1 class="my-4">Listado de Inscritos a Competición</h1>';
-        ?>
-        <div class="container form">
-        <form class="form-horizontal" role="form" method="POST">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <label class="sr-only" for="email">Evento</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <select class="form-control" name="elegirEvento">
-                          <?php
-                          $con = conexion();
-
-                          //Realización de
-                          $sql = $con->prepare("SELECT * FROM competiciones");
-                          $sql->execute();
-
-                          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                          for ($i=0; $i < count($row); $i++) {
-                            echo '<option value="'.$row[$i]["idCompeticion"].'">';
-                            echo $row[$i]['nombreEvento'];
-                            echo " - ";
-                            echo $row[$i]['fechaEvento'];
-                            echo "</option>";
-                          }
-                          ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="padding-top: 1rem">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-success" name="btnCompeticion">Seleccionar Competicion</button>
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
-            </div>
-        </div>
-      </div>
-        <?php
-      }
-
-      if (isset($_POST['btnCompeticion'])) {
-        include("procesos/listadoResultados.php");
-      }
-
-      if (isset($_GET['Evento'])) {
-        echo '<h1 class="my-4">Listado de Resultados de Competición</h1>';
-        ?>
-        <div class="container form">
-        <form class="form-horizontal" role="form" method="POST">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-                <div class="form-group has-danger">
-                    <label class="sr-only" for="email">Evento</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <select class="form-control" name="elegirEvento">
-                          <?php
-                          $con = conexion();
-
-                          //Realización de
-                          $sql = $con->prepare("SELECT * FROM competiciones");
-                          $sql->execute();
-
-                          $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-                          for ($i=0; $i < count($row); $i++) {
-                            echo '<option value="'.$row[$i]["idCompeticion"].'">';
-                            echo $row[$i]['nombreEvento'];
-                            echo " - ";
-                            echo $row[$i]['fechaEvento'];
-                            echo "</option>";
-                          }
-                          ?>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="padding-top: 1rem">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-success" name="btnCompeticion">Seleccionar Competicion</button>
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="index.php"> Volver al Indice</button>
-            </div>
-        </div>
-      </div>
-        <?php
-      }
-
-      if (isset($_POST['btnEvento'])) {
         include("procesos/listadoInscritos.php");
       }
 
+
+      if (isset($_GET['Evento'])) {
+        echo '<h1 class="my-4">Listado de Resultados de Competición</h1>';
+        include("procesos/listadoResultados.php");
+      }
 
       function conexion(){
         $usuario = 'root';
