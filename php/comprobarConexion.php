@@ -11,7 +11,7 @@ if (!isset($_SESSION)) {
 $contraRoot = '';
 
 try {
-  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
   $mbd = null;
 } catch (PDOException $e) {
   print "¡Error!: " . $e->getMessage() . "<br/>";
