@@ -150,15 +150,15 @@ session_start();
           <?php
 
           $usuario = 'root';
-$contraRoot = '';
+          $contraRoot = '';
 
-try {
-  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-  $mbd = null;
-} catch (PDOException $e) {
-  print "¡Error!: " . $e->getMessage() . "<br/>";
-  die();
-}
+          try {
+            $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
+            $mbd = null;
+          } catch (PDOException $e) {
+            print "¡Error!: " . $e->getMessage() . "<br/>";
+            die();
+          }
 
 
 
@@ -208,7 +208,6 @@ try {
             if (count($rows) < $Limite) {
               $Limite = count($rows);
             }
-
             for ($n=$_SESSION['Actual']; $n < $Limite; $n++){
                 echo '<div class="card mb-4">';
                   echo '<img class="card-img-top" src="'.$rows[$n]['rutaImagen'].'">';
