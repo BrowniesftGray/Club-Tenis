@@ -163,7 +163,7 @@ session_start();
 
 
           //Realización de
-          $sql = $con->prepare("SELECT * FROM noticias ORDER BY fechaPublicacion");
+          $sql = $con->prepare("SELECT * FROM noticias ORDER BY idNoticias DESC, fechaPublicacion DESC");
           $sql->execute();
 
           $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
