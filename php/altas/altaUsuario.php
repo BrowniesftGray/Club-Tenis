@@ -7,14 +7,17 @@
   $telefono = $_REQUEST['txtTelefono'];
 
   $usuario = 'root';
-  $contraseña = '';
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
   $insertJugador = $con->prepare("INSERT INTO jugadores (nombreJugador, direccionJugador, emailJugador) VALUES ('$nombre','$direccion','$email')");
   $insertJugador->execute();
 
@@ -28,5 +31,5 @@
 
   $actualizarUsuario = $con->prepare("UPDATE usuarios JOIN jugadores ON jugadores.emailJugador = usuarios.emailUsuario SET usuarios.idJugadorFK = jugadores.idJugador");
   $actualizarUsuario->execute();
-  
+
 ?>

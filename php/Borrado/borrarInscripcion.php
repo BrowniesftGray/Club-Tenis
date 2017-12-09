@@ -4,14 +4,17 @@
   $idJugador = $_SESSION['idJugador'];
 
   $usuario = 'root';
-  $contraseña = '';
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
   $insertarCompeticion = $con->prepare("DELETE FROM inscripciones WHERE idCompeticionFK = $id AND idJugadorFK = $idJugador");
   $insertarCompeticion->execute();
 

@@ -5,14 +5,17 @@
   $competicion = $_REQUEST['elegirCompeticion'];
 
   $usuario = 'root';
-  $contraseña = '';
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
   $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($jugador, $espacio, $competicion)");
   $insertJugador->execute();
 

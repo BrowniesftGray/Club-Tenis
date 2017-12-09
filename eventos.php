@@ -169,15 +169,17 @@ session_start();
             <tbody>
               <?php
               $usuario = 'root';
-              $contraRoot = '';
+$contraRoot = '';
 
-              try {
-                $con = new PDO('mysql:host=localhost;dbname=club;charset=utf8', $usuario, $contraRoot);
-                $mbd = null;
-              } catch (PDOException $e) {
-                  print "¡Error!: " . $e->getMessage() . "<br/>";
-                  die();
-              }
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
 
               //Realización de
               $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento DESC");

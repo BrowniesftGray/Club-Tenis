@@ -1,6 +1,6 @@
 <?php
-  $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
 
+  $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
   $destino = "/home/u752794017/public_html/club/imagenes/$titulo";
   if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // verifica haya sido cargado el archivo
     //echo "<pre>";
@@ -19,18 +19,15 @@
       }
   }
 
+  $titulo = $_REQUEST['txtTitulo'];
   $descripcion = $_REQUEST['txtDescripcion'];
   if (isset($final)) {
     $imagen = "imagenes/".$titulo."_portada.jpg";
   }
-  else{
-    $imagen = "";
-  }
   $email = $_SESSION['email'];
-  $fecha = date("Y/m/d");//fecha hoy
 
 
-  $usuario = 'root';
+$usuario = 'root';
 $contraRoot = '';
 
 try {
@@ -41,10 +38,17 @@ try {
   die();
 }
 
+$idNoticia = $_REQUEST['idNoticia'];
 
 
-  $insertarCompeticion = $con->prepare("INSERT INTO noticias (titulo, descripcion, rutaImagen, fechaPublicacion, emailUsuarioFK) VALUES ('$titulo','$descripcion', '$imagen', '$fecha', '$email')");
+  if (isset($imagen)) {
+    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion', rutaImagen = '$imagen' WHERE idNoticias = $idNoticia");
+  }
+  else{
+    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion' WHERE idNoticias = $idNoticia");
+
+  }
   $insertarCompeticion->execute();
 
-  echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert"></button>Se añadió la noticia correctamente</div>';
+  echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert"></button>Se modificó la noticia correctamente</div>';
 ?>

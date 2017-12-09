@@ -1,7 +1,24 @@
 <?php
 
+$usuario = 'root';
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+  $conseguirNumero = $con->prepare("SELECT idNoticias FROM noticias");
+  $conseguirNumero->execute();
+  $row = $conseguirNumero->fetchAll(PDO::FETCH_ASSOC);
+  $numero = count($row)+1;
+
   $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
-  $destino = "imagenes/$titulo";
+  $titulo = $titulo.$numero;
+  $destino = "/home/u752794017/public_html/club/imagenes/$titulo";
   if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // verifica haya sido cargado el archivo
     //echo "<pre>";
     //print_r($_FILES);
@@ -19,32 +36,27 @@
       }
   }
 
-  $titulo = $_REQUEST['txtTitulo'];
   $descripcion = $_REQUEST['txtDescripcion'];
   if (isset($final)) {
-    $imagen = $final;
+    $imagen = "imagenes/".$titulo."_portada.jpg";
   }
+  $titulo = $_REQUEST['txtTitulo'];
   $email = $_SESSION['email'];
 
+  $idNoticia = $_REQUEST['idNoticia'];
 
-  $usuario = 'root';
-  $contraseña = '';
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+
+
 
   if (isset($imagen)) {
-    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion', rutaImagen = '$imagen'");
+    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion', rutaImagen = '$imagen' WHERE idNoticias = $idNoticia");
+    $insertarCompeticion->execute();
+    print_r($insertarCompeticion);
   }
   else{
-    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion'");
-
+    $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion' WHERE idNoticias = $idNoticia");
+    $insertarCompeticion->execute();
   }
-  $insertarCompeticion->execute();
 
   echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert"></button>Se modificó la noticia correctamente</div>';
 ?>

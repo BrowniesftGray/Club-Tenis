@@ -36,6 +36,21 @@ session_start();
 <body>
   <?php
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
+  $usuario = 'root';
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
 
 
   if ($_SESSION['tipo'] == 'Administrador') {
@@ -62,7 +77,7 @@ session_start();
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
                                    <?php
-                                     $con = conexion();
+
 
                                      //Realización de
                                      $idNoticia = $_GET['idNoticia'];
@@ -111,20 +126,6 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button><a href="login.php>"conéctese</a>';
-  }
-
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
   }
     ?>
 </body>

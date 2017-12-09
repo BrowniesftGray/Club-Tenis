@@ -9,19 +9,17 @@ if ( $detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytab
   echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No tiene acceso a esta características en el móvil.</div>';
 }
 else{
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
+  $usuario = 'root';
+$contraRoot = '';
 
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
-  }
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
 ?>
 
 <!DOCTYPE html>

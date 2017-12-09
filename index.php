@@ -149,17 +149,18 @@ session_start();
 
           <?php
 
-
           $usuario = 'root';
-          $contraRoot = '';
+$contraRoot = '';
 
-          try {
-            $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-            $mbd = null;
-          } catch (PDOException $e) {
-              print "¡Error!: " . $e->getMessage() . "<br/>";
-              die();
-          }
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
 
           //Realización de
           $sql = $con->prepare("SELECT * FROM noticias ORDER BY fechaPublicacion");
@@ -278,13 +279,11 @@ session_start();
           <div class="card my-4">
             <h5 class="card-header">Animación</h5>
             <div class="card-body">
-              <div class="input-group">
                 <?php
                 $numero = rand(1, 6);
                 $numero = $numero.".gif";
-                echo '<img src="gif/'.$numero.'" alt="">';
+                echo '<img class="img-responsive col-12" src="gif/'.$numero.'" alt="">';
                 ?>
-              </div>
             </div>
           </div>
 
@@ -300,7 +299,7 @@ session_start();
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Darío Gómez Mármol</p>
       </div>
       <!-- /.container -->
     </footer>

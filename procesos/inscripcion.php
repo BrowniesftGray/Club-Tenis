@@ -26,7 +26,18 @@ session_start();
 
     }
 
-    $con = conexion();
+    $usuario = 'root';
+    $contraRoot = '';
+
+    try {
+      $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+      $mbd = null;
+    } catch (PDOException $e) {
+      print "¡Error!: " . $e->getMessage() . "<br/>";
+      die();
+    }
+
+
 
     $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
     $nombreEventoSql->execute();
@@ -60,6 +71,10 @@ session_start();
 
   <?php
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
 
   if ($_SESSION['tipo'] == 'Administrador') {
 
@@ -101,7 +116,7 @@ session_start();
       }
     }
 
-    $con = conexion();
+
 
     //Realización de
     $jugador = $_SESSION['idJugador'];
@@ -290,20 +305,6 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
-  }
-
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
   }
     ?>
   </div>

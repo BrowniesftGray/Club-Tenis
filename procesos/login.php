@@ -46,7 +46,11 @@ session_start();
         $_SESSION['tipo'] = "";
       }
 
-    include("../php/navbar.php");
+      include("../php/navbar.php");
+      ?>
+      <div id="formularios"></div>
+      <div id="divMensajes"><p id="pMensaje"></p></div>
+      <?php
 
 
     if (isset($_POST["btnLogin"])) {

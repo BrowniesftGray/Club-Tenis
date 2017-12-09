@@ -26,7 +26,18 @@ session_start();
 
     }
 
-    $con = conexion();
+    $usuario = 'root';
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
 
     $nombreEventoSql = $con->prepare("SELECT nombreEvento FROM competiciones WHERE idCompeticion = $idCompeticion");
     $nombreEventoSql->execute();
@@ -60,6 +71,10 @@ session_start();
   <?php
 
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
   if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST["btnTransporte"])) {
@@ -82,7 +97,7 @@ session_start();
         include("../php/altas/altaResultado.php");
       }
     }
-    $con = conexion();
+
 
     $jugador = $_SESSION['idJugador'];
     $comprorbarInscripcion = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND idJugadorFK = $jugador");
@@ -338,20 +353,6 @@ session_start();
   }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
-  }
-
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
   }
     ?>
   </div>

@@ -9,19 +9,17 @@ if ( $detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytab
 echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No tiene acceso a esta características en el móvil.</div>';
 }
 else{
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
+  $usuario = 'root';
+$contraRoot = '';
 
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
-  }
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +54,10 @@ else{
 <body>
   <?php
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
 
 
   if ($_SESSION['tipo'] == 'Administrador') {
@@ -83,7 +85,7 @@ else{
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <select class="form-control" name="elegirUsuario">
                           <?php
-                          $con = conexion();
+
 
                           //Realización de
                           $sql = $con->prepare("SELECT * FROM usuarios");
@@ -126,7 +128,7 @@ else{
       $email = $_POST['txtEmail'];
     }
 
-    $con = conexion();
+
 
     $sql2 = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='".$email."'");
     $sql2->execute();

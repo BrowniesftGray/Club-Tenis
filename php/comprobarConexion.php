@@ -6,16 +6,19 @@ if (!isset($_SESSION)) {
 
   $email = $_REQUEST['email'];
   $contra = $_REQUEST['txtContra'];
-  $usuario = 'root';
-  $contraRoot = '';
 
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+  $usuario = 'root';
+$contraRoot = '';
+
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+
 
   //Realización de
   $sql = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='$email' AND contra='$contra'");

@@ -12,7 +12,6 @@ if (!isset($_POST['btnCompeticion'])) {
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                   <select class="form-control" name="elegirEvento">
                     <?php
-                    $con = conexion();
 
                     //Realización de
                     $sql = $con->prepare("SELECT * FROM competiciones");
@@ -42,22 +41,23 @@ if (!isset($_POST['btnCompeticion'])) {
           <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
       </div>
   </div>
+</form>
 </div>
   <?php
 }
 else{
 
-  $idCompeticion = $_REQUEST['elegirEvento'];
+  $idCompeticion= $_POST['elegirEvento'];
   $usuario = 'root';
-  $contraseña = '';
+$contraRoot = '';
 
-  try {
-    $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-    $mbd = null;
-  } catch (PDOException $e) {
-      print "¡Error!: " . $e->getMessage() . "<br/>";
-      die();
-  }
+try {
+  $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
 
   //Resultados para la competición
   $participantes = array();

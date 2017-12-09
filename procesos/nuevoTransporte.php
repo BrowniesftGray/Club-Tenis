@@ -43,6 +43,10 @@ session_start();
 <body>
   <?php
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
 
   if ($_SESSION['tipo'] == 'Administrador') {
 
@@ -99,7 +103,18 @@ session_start();
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                           <select class="form-control" name="elegirCompeticion">
                             <?php
-                            $con = conexion();
+                            $usuario = 'root';
+                            $contraRoot = '';
+
+                            try {
+                              $con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+                              $mbd = null;
+                            } catch (PDOException $e) {
+                              print "¡Error!: " . $e->getMessage() . "<br/>";
+                              die();
+                            }
+
+
 
                             $date = date("Y-m-d");
                             //Realización de
@@ -108,11 +123,18 @@ session_start();
 
                             $row = $sql->fetchAll(PDO::FETCH_ASSOC);
 
+                            if (count($row) > 0) {
+                              # code...
+
                             for ($i=0; $i < count($row); $i++) {
                               echo '<option value="'.$row[$i]["idCompeticion"].'">';
                               echo $row[$i]['nombreEvento'];
                               echo "</option>";
                             }
+                          }
+                          else{
+                            echo "<option> No hay competiciones disponibles</option>";
+                          }
                             ?>
                           </select>
                         </div>
@@ -136,19 +158,6 @@ session_start();
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
   }
 
-  function conexion(){
-    $usuario = 'root';
-    $contraRoot = '';
-
-    try {
-      $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-      $mbd = null;
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
-    }
-    return $con;
-  }
     ?>
 </body>
 </html>

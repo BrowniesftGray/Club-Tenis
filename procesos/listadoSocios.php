@@ -1,16 +1,19 @@
 <?php
 $usuario = 'root';
-$contraseña = '';
+$contraRoot = '';
+
 try {
-  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraseña);
-  $mbd = null;
+$con = new PDO('mysql:host=localhost;dbname=u752794017_club;charset=UTF8', $usuario, $contraRoot);
+$mbd = null;
 } catch (PDOException $e) {
-    print "¡Error!: " . $e->getMessage() . "<br/>";
-    die();
+print "¡Error!: " . $e->getMessage() . "<br/>";
+die();
 }
 
+
+
   //Realización de
-  $sql = $con->prepare("SELECT * FROM Usuarios");
+  $sql = $con->prepare("SELECT * FROM usuarios");
   $sql->execute();
   $content = '<html>';
   $content .= '<head>';
@@ -40,7 +43,8 @@ try {
   $content .= "<tbody>";
 
   $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-  for ($i=0; $i < count($row); $i++) {
+
+    for ($i=0; $i < count($row); $i++) {
     $content .= "<tr>";
       $content .= "<td>";
         $content .= $row[$i]['emailUsuario'];

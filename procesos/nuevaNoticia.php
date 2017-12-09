@@ -36,6 +36,10 @@ session_start();
 <body>
   <?php
   include("../php/navbar.php");
+  ?>
+  <div id="formularios"></div>
+  <div id="divMensajes"><p id="pMensaje"></p></div>
+  <?php
 
 
   if ($_SESSION['tipo'] == 'Administrador') {
