@@ -1,7 +1,24 @@
 <?php
-  $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
+$usuario = 'root';
+$contraRoot = '';
 
-  $destino = "/home/u752794017/public_html/club/imagenes/$titulo";
+try {
+  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
+  $mbd = null;
+} catch (PDOException $e) {
+  print "¡Error!: " . $e->getMessage() . "<br/>";
+  die();
+}
+
+  $conseguirNumero = $con->prepare("SELECT idNoticias FROM noticias");
+  $conseguirNumero->execute();
+  $row = $conseguirNumero->fetchAll(PDO::FETCH_ASSOC);
+  $numero = count($row)+1;
+
+  $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
+  $titulo = $titulo.$numero;
+
+  $destino = "../imagenes/$titulo";
   if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // verifica haya sido cargado el archivo
     //echo "<pre>";
     //print_r($_FILES);
@@ -26,20 +43,9 @@
   else{
     $imagen = "";
   }
+  $titulo = $_REQUEST['txtTitulo'];
   $email = $_SESSION['email'];
   $fecha = date("Y/m/d");//fecha hoy
-
-
-  $usuario = 'root';
-$contraRoot = '';
-
-try {
-  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-  $mbd = null;
-} catch (PDOException $e) {
-  print "¡Error!: " . $e->getMessage() . "<br/>";
-  die();
-}
 
 
 

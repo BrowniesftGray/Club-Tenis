@@ -18,7 +18,7 @@ try {
 
   $titulo = str_replace(" ", "", $_REQUEST['txtTitulo']);
   $titulo = $titulo.$numero;
-  $destino = "/home/u752794017/public_html/club/imagenes/$titulo";
+  $destino = "../imagenes/$titulo";
   if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // verifica haya sido cargado el archivo
     //echo "<pre>";
     //print_r($_FILES);
@@ -51,7 +51,7 @@ try {
   if (isset($imagen)) {
     $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion', rutaImagen = '$imagen' WHERE idNoticias = $idNoticia");
     $insertarCompeticion->execute();
-    print_r($insertarCompeticion);
+    //print_r($insertarCompeticion);
   }
   else{
     $insertarCompeticion = $con->prepare("UPDATE noticias SET titulo = '$titulo', descripcion = '$descripcion' WHERE idNoticias = $idNoticia");
