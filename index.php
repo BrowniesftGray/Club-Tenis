@@ -61,7 +61,7 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Inicio
+              <a class="nav-link" href="index.php">Inicio
                 <span class="sr-only">(current)</span>
               </a>
             </li>
