@@ -2,23 +2,6 @@
 session_name("aplicacion");
 session_start();
 
-include('php/Mobile_Detect.php');
-$detect = new Mobile_Detect();
-
-if ( $detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet() || $detect->isAndroid() || $detect->isIphone() || $detect->isMobile() ) {
-  echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No tiene acceso a esta características en el móvil.</div>';
-}
-else{
-  $usuario = 'root';
-$contraRoot = '';
-
-try {
-  $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
-  $mbd = null;
-} catch (PDOException $e) {
-  print "¡Error!: " . $e->getMessage() . "<br/>";
-  die();
-}
 
 ?>
 
@@ -159,6 +142,24 @@ try {
     <div class="col-md-8">
 
       <?php
+      include('php/Mobile_Detect.php');
+      $detect = new Mobile_Detect();
+
+      if ( $detect->isAndroidtablet() || $detect->isIpad() || $detect->isBlackberrytablet() || $detect->isAndroid() || $detect->isIphone() || $detect->isMobile() ) {
+        echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No tiene acceso a esta características en el móvil.</div>';
+      }
+      else{
+        $usuario = 'root';
+        $contraRoot = '';
+
+        try {
+          $con = new PDO('mysql:host=localhost;dbname=club;charset=UTF8', $usuario, $contraRoot);
+          $mbd = null;
+        } catch (PDOException $e) {
+          print "¡Error!: " . $e->getMessage() . "<br/>";
+          die();
+        }
+        
       if (isset($_GET['Socios'])) {
         echo '<h1 class="my-4">Listado de Socios</h1>';
         include("procesos/listadoSocios.php");
