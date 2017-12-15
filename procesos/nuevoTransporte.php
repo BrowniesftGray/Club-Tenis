@@ -89,10 +89,9 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtEspacio">Espacio</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="txtEspacio">Espacio</label>
+
                             <input type="number" name="txtEspacio" class="form-control" value="1" autofocus>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -100,7 +99,7 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+
                           <select class="form-control" name="elegirCompeticion">
                             <?php
                             $usuario = 'root';
@@ -137,7 +136,6 @@ session_start();
                           }
                             ?>
                           </select>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -198,14 +198,13 @@ try {
               <div class="col-md-3"></div>
               <div class="col-md-6">
                 <div class="form-group has-danger">
-                  <label class="sr-only" for="txtEspacio">Fase</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtEspacio">Fase</label>
+
                     <?php
                     echo '<input type="text" name="txtNombreFase" class="form-control" id="nombreEvento" value="'.$fase.'" readonly="true">';
                     echo '<input type="hidden" name="numFase" value="'.$numFase.'">'
 
                     ?>
-                  </div>
                 </div>
               </div>
             </div>
@@ -213,13 +212,12 @@ try {
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtEspacio">Resultado</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="txtEspacio">Resultado</label>
+
                           <select class="form-control" name="elegirResultado">
                             <option value="0">Victoria</option>
                             <option value="1">Derrota</option>
                           </select>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -227,7 +225,7 @@ try {
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      <label for="elegirContrincante">Elegir Contrincante</label>
                           <select class="form-control" name="elegirContrincante">
                             <?php
 
@@ -248,7 +246,6 @@ try {
                           //print_r($contrincantes);
                           echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'">'
                           ?>
-                        </div>
                     </div>
                 </div>
             </div>

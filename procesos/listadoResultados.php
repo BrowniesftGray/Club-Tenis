@@ -8,8 +8,8 @@ if (!isset($_POST['btnCompeticion'])) {
       <div class="col-md-3"></div>
       <div class="col-md-6">
           <div class="form-group has-danger">
-              <label class="sr-only" for="email">Evento</label>
-              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+              <label  for="email">Evento</label>
+
                   <select class="form-control" name="elegirEvento">
                     <?php
 
@@ -28,7 +28,6 @@ if (!isset($_POST['btnCompeticion'])) {
                     }
                     ?>
                   </select>
-              </div>
           </div>
       </div>
   </div>

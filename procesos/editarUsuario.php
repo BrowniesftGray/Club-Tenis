@@ -81,8 +81,8 @@ session_start();
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="form-group has-danger">
-                    <label class="sr-only" for="email">Usuario</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label  for="email">Usuario</label>
+
                         <select class="form-control" name="elegirUsuario">
                           <?php
 
@@ -102,7 +102,6 @@ session_start();
                           }
                           ?>
                         </select>
-                    </div>
                 </div>
             </div>
         </div>
@@ -166,8 +165,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtEmail">Email</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtEmail">Email</label>
+
                     <?php
                     echo '<input id="txtEmail" name="txtEmail" type="text" placeholder="ejemplo@correo.com" class="form-control" value="'.$email.'">';
                     ?>
@@ -181,8 +180,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtNombre">Nombre</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtNombre">Nombre</label>
+
                       <?php
                       echo '<input id="txtNombre" type="text" name="txtNombre" placeholder="Mario Sánchez" class="form-control" value="'.$nombre.'">';
                       ?>
@@ -195,8 +194,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtContra">Contraseña</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtContra">Contraseña</label>
+
                       <?php
                       echo '<input id="txtContra" type="password" name="txtContra" placeholder="cinco Caracteres Minimo" class="form-control" value="'.$contra.'">';
                       ?>
@@ -210,8 +209,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtDireccion">Direccion</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtDireccion">Direccion</label>
+
                       <?php
                       echo '<input id="txtDireccion" type="text" name="txtDireccion" placeholder="Avenida de España, 14" class="form-control" value="'.$direccion.'">';
                       ?>
@@ -225,8 +224,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtTelefono">Telefono</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtTelefono">Telefono</label>
+
                       <?php
                       echo '<input id="txtTelefono" type="text" name="txtTelefono" placeholder="955 08 54 89" class="form-control" value="'.$telefono.'">';
                       ?>
@@ -240,8 +239,8 @@ session_start();
           <div class="col-md-3"></div>
           <div class="col-md-6">
               <div class="form-group has-danger">
-                  <label class="sr-only" for="txtTipo">Tipo de Usuario</label>
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <label  for="txtTipo">Tipo de Usuario</label>
+
                       <select class="form-control" id="txtTipo" name="txtTipo">
                         <option value="Usuario">Usuario</option>
                         <option value="Administrador">Administrador</option>

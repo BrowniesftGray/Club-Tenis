@@ -93,12 +93,9 @@ session_start();
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <div class="form-group has-danger">
-                        <label class="sr-only" for="txtNombreEvento">NombreEvento</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="text" name="txtNombreEvento" class="form-control" id="nombreEvento"
-                                   placeholder="NombreEvento de prueba" autofocus>
-                        </div>
+                    <div class="form-group">
+                        <label class="label" for="txtNombreEvento">Nombre de Competición:</label>
+                            <input type="text" name="txtNombreEvento" class="form-control" id="nombreEvento">
                     </div>
                 </div>
             </div>
@@ -106,11 +103,8 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="sr-only" for="txtfechaEvento">Fecha de Evento</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <input type="text" name="txtfechaEvento" class="form-control" id="txtfechaEvento"
-                                   placeholder="fechaEvento">
-                        </div>
+                        <label for="txtfechaEvento">Fecha de Comienzo</label>
+                            <input type="text" name="txtfechaEvento" class="form-control" id="txtfechaEvento">
                     </div>
                 </div>
             </div>
@@ -118,11 +112,10 @@ session_start();
               <div class="col-md-3"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                    <label class="sr-only" for="txtDescripcion">Descripcion</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label for="txtDescripcion">Descripcion</label>
+
                         <textarea name="txtDescripcion" class="form-control" id="txtDescripcion"
                                placeholder="Descripcion" rows="6"></textarea>
-                    </div>
                 </div>
               </div>
             </div>

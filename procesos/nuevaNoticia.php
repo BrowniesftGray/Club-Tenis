@@ -90,11 +90,10 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtTitulo">Titulo</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="txtTitulo">Titulo</label>
+
                             <input type="text" name="txtTitulo" class="form-control" id="titulo"
                                    placeholder="Titulo de prueba" autofocus>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -102,11 +101,10 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="sr-only" for="txtDescripcion">Descripcion</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="txtDescripcion">Descripcion</label>
+
                             <textarea name="txtDescripcion" class="form-control" id="txtDescripcion"
                                    placeholder="Descripcion" rows="6"></textarea>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -145,8 +145,8 @@ session_start();
               <div class="col-md-3"></div>
               <div class="col-md-6">
                   <div class="form-group has-danger">
-                      <label class="sr-only" for="txtNombreEvento">Nombre Evento</label>
-                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      <label  for="txtNombreEvento">Nombre Evento</label>
+
 
                                  <?php
                                   $row = $nombreEventoSql->fetchAll(PDO::FETCH_ASSOC);
@@ -155,7 +155,6 @@ session_start();
                                          placeholder="NombreEvento de prueba" autofocus readonly="true" value="'.$nombreEvento.'">';
                                   echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'"/>';
                                  ?>
-                      </div>
                   </div>
               </div>
           </div>
@@ -206,8 +205,8 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group has-danger">
-                        <label class="sr-only" for="txtNombreEvento">Nombre Evento</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="txtNombreEvento">Nombre Evento</label>
+
 
                                    <?php
                                     $row = $nombreEventoSql->fetchAll(PDO::FETCH_ASSOC);
@@ -218,7 +217,6 @@ session_start();
                                            placeholder="NombreEvento de prueba" autofocus readonly="true" value="'.$nombreEvento.'">';
                                            echo '<input type="hidden" name="idCompeticion" value="'.$idCompeticion.'"/>';
                                    ?>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -226,8 +224,8 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="sr-only" for="elegirTransporte">Transporte</label>
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <label  for="elegirTransporte">Transporte</label>
+
                             <select class="form-control" name="elegirTransporte">
                               <?php
                               $cuenta = $transporteSql->rowCount();
@@ -252,7 +250,6 @@ session_start();
                             }
                               ?>
                             </select>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -260,8 +257,8 @@ session_start();
               <div class="col-md-3"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                    <label class="sr-only" for="txtComentario">Comentario</label>
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <label  for="txtComentario">Comentario</label>
+
                         <textarea name="txtComentario" class="form-control" id="txtComentario"
                                placeholder="Comentario" rows="2"></textarea>
                     </div>
