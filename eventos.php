@@ -164,6 +164,7 @@ session_start();
                 <th>Nombre de Evento</th>
                 <th>Fecha de Comienzo</th>
                 <th>Opciones</th>
+                <th>Transporte</th>
               </tr>
             </thead>
             <tbody>
@@ -193,14 +194,19 @@ try {
                 if ($rows[$i]['fechaEvento'] >= $date) {
                 echo "<tr class='table-info'>";
                   echo "<td>";
-                  echo $rows[$i]['nombreEvento'];
+                    echo $rows[$i]['nombreEvento'];
                   echo "</td>";
                   echo "<td>";
-                  echo $rows[$i]['fechaEvento'];
+                    echo $rows[$i]['fechaEvento'];
                   echo "</td>";
                   echo "<td>";
-                  echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                  echo "Inscripcion";
+                    echo '<a href="procesos/inscripcion.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                    echo "Inscripcion";
+                  echo "</a>";
+                  echo "</td>";
+                  echo "<td>";
+                    echo '<a href="procesos/listadoTransporte.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                    echo "Transporte";
                   echo "</a>";
                   echo "</td>";
                 echo "</tr>";
@@ -208,14 +214,19 @@ try {
                 else{
                   echo "<tr class='table-danger'>";
                     echo "<td>";
-                    echo $rows[$i]['nombreEvento'];
+                      echo $rows[$i]['nombreEvento'];
                     echo "</td>";
                     echo "<td>";
-                    echo $rows[$i]['fechaEvento'];
+                      echo $rows[$i]['fechaEvento'];
                     echo "</td>";
                     echo "<td>";
-                    echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
-                    echo "Resultados";
+                      echo '<a href="procesos/resultados.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                      echo "Resultados";
+                    echo "</a>";
+                    echo "</td>";
+                    echo "<td>";
+                      echo '<a href="procesos/listadoTransporte.php?idCompeticion='.$idCompeticion.'" class="btn btn-info">';
+                      echo "Transporte";
                     echo "</a>";
                     echo "</td>";
                   echo "</tr>";
