@@ -25,7 +25,7 @@ try {
 
   $cuenta = $sql->rowCount();
 
-  if ($cuenta>=1) {
+  if ($cuenta==0) {
 
     if ($idTransporte == 0) {
       $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($idJugador, 0, $idCompeticion)");

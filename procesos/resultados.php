@@ -109,7 +109,7 @@ try {
       # code...
 
     $jugador = $_SESSION['idJugador'];
-    $comprobarFase = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $jugador OR idPerdedor = $jugador) ORDER BY Fase");
+    $comprobarFase = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $jugador OR idPerdedor = $jugador) ORDER BY Fase DESC");
     $comprobarFase->execute();
 
     $row = $comprobarFase->fetchAll(PDO::FETCH_ASSOC);
@@ -176,7 +176,9 @@ try {
         $comprobarContrincante->execute();
         $perdedorOponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($perdedorOponente[0]['idPerdedor'] != $idContrincante) {
+        if (count($perdedorOponente) > 0) {
+          # code...
+        if ($perdedorOponente[0]['idGanador'] == $idContrincante) {
 
 
         $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
@@ -186,6 +188,7 @@ try {
         $contrincantes[$i]['idContrincante'] = $idContrincante;
         $contrincantes[$i]['nombreContrincante'] = $nombreC;
       }
+    }
 
       }
     }
@@ -298,10 +301,10 @@ try {
         echo "Participante";
       echo "</th>";
       echo "<th>";
-        echo "Victorias";
+        echo "Fase Alcanzada";
       echo "</th>";
       echo "<th>";
-        echo "Derrotas";
+        echo "Victorias";
       echo "</th>";
       echo "</tr>";
     echo "</thead>";
@@ -312,22 +315,50 @@ try {
       $victorias = $con->prepare("SELECT COUNT(idGanador) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idGanador = $participante");
       $victorias->execute();
 
-      $derrotas = $con->prepare("SELECT COUNT(idPerdedor) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idPerdedor = $participante");
-      $derrotas->execute();
-
-      $nombreJugador = $con->prepare("SELECT nombreJugador FROM jugadores WHERE idJugador = $participante");
+      $nombreJugador = $con->prepare("SELECT nombreJugador, emailJugador FROM jugadores WHERE idJugador = $participante");
       $nombreJugador->execute();
-      //$sql = $con->prepare("SELECT COUNT(resultados.idGanador), resultados.idGanador, COUNT(resultados.idPerdedor), resultados.idPerdedor, competiciones.nombreEvento, jugadores.nombreJugador FROM ((resultados INNER JOIN competiciones ON resultados.idCompeticionFK = competiciones.idCompeticion) INNER JOIN jugadores ON resultados.idPerdedor = jugadores.idJugador OR resultados.idGanador = jugadores.idJugador) WHERE idCompeticionFK = $idCompeticion AND idGanador=$participante");
-      //$sql->execute();
 
       $row = $victorias->fetchAll(PDO::FETCH_ASSOC);
+
+      $fase = $row[0]['COUNT(idGanador)'];
+      switch ($fase) {
+        case 0:
+          $fase = "Preliminares";
+          break;
+
+        case 1:
+          $fase = "Dieciseisavos";
+          break;
+
+        case 2:
+          $fase = "Octavos";
+          break;
+
+        case 3:
+          $fase = "Cuartos";
+          break;
+
+        case 4:
+          $fase = "Semifinal";
+          break;
+
+        case 5:
+          $fase = "Final";
+          break;
+
+        case 6:
+          $fase = "Ganador Final";
+          break;
+      }
+
       $data[$i]['Victorias'] = $row[0]['COUNT(idGanador)'];
 
-      $row = $derrotas->fetchAll(PDO::FETCH_ASSOC);
-      $data[$i]['Derrotas'] = $row[0]['COUNT(idPerdedor)'];
+      $data[$i]['Fase'] = $fase;
+
 
       $row = $nombreJugador->fetchAll(PDO::FETCH_ASSOC);
       $data[$i]['Nombre'] = $row[0]['nombreJugador'];
+      $data[$i]['Email'] = $row[0]['emailJugador'];
 
     }
 
@@ -335,13 +366,15 @@ try {
     for ($i=0; $i < count($data); $i++) {
       echo "<tr>";
         echo "<td>";
-        echo $data[$i]['Nombre'];
+          echo $data[$i]['Nombre'];
+        echo " - ";
+          echo $data[$i]['Email'];
         echo "</td>";
         echo "<td>";
-        echo $data[$i]['Victorias'];
+          echo $data[$i]['Fase'];
         echo "</td>";
         echo "<td>";
-        echo $data[$i]['Derrotas'];
+          echo $data[$i]['Victorias'];
         echo "</td>";
       echo "</tr>";
     }
