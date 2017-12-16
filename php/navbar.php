@@ -59,7 +59,6 @@
                 ?>
 
                 <!-- Admins only-->
-              <li><a class="dropdown-item" id="altaUsuario" href="#">Alta de Usuario</a></li>
               <li><a class="dropdown-item" id="modificacionUsuario" href="editarUsuario.php">Modificación de Usuario</a></li>
                 <?php
               }
