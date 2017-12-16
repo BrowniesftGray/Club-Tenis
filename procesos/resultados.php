@@ -134,12 +134,17 @@ try {
 
         case 3:
           $numFase = 4;
-          $fase = "SemiFinal";
+          $fase = "Cuartos";
           break;
 
         case 4:
-          $fase = "Final";
+          $fase = "SemiFinal";
           $numFase = 5;
+          break;
+
+        case 5:
+          $fase = "Final";
+          $numFase = 6;
           break;
       }
 

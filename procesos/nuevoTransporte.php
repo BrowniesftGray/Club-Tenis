@@ -99,7 +99,7 @@ session_start();
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
-
+                      <label for="elegirCompeticion">Elegir Competición</label>
                           <select class="form-control" name="elegirCompeticion">
                             <?php
                             $usuario = 'root';
