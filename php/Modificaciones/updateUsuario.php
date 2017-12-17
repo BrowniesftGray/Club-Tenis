@@ -27,6 +27,8 @@ try {
 
   $insertarUsuario = $con->prepare("UPDATE usuarios SET nombre = '$nombre', contra = '$contra', direccion = '$direccion', telefono = $telefono, tipoPerfil = '$perfil' WHERE emailUsuario = '$email'");
   $insertarUsuario->execute();
+  $insertarUsuario = $con->prepare("UPDATE jugadores SET nombreJugador = '$nombre',  direccion = '$direccion' WHERE emailUsuario = '$email'");
+  $insertarUsuario->execute();
 
   //print_r($insertarUsuario);
 
