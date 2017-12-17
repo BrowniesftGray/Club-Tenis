@@ -159,6 +159,7 @@ session_start();
         $contra = $row[0]['contra'];
         $direccion = $row[0]['direccion'];
         $telefono = $row[0]['telefono'];
+        $perfil = $row[0]['tipoPerfil'];
 
         ?>
         <div class="row">
@@ -235,11 +236,20 @@ session_start();
           <div class="col-md-6">
               <div class="form-group has-danger">
                   <label  for="txtTipo">Tipo de Usuario</label>
+                    <?php
+                    if ($tipo == "Administrador") {
+                      echo '<input id="txtTipo" type="text" name="txtTipo" class="form-control" value="'.$tipo.'" readonly="true">';
+                    }
+                    else{
 
+                    ?>
                       <select class="form-control" id="txtTipo" name="txtTipo">
                         <option value="Usuario">Usuario</option>
                         <option value="Administrador">Administrador</option>
                       </select>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
           </div>
