@@ -139,7 +139,6 @@ session_start();
   <div class="row">
 
     <!-- Blog Entries Column -->
-    <div class="col-md-8">
 
       <?php
       include('php/Mobile_Detect.php');
@@ -183,6 +182,5 @@ session_start();
 
     }
       ?>
-    </div>
   </div>
 </div>
