@@ -48,8 +48,6 @@ session_start();
   <div id="divMensajes"><p id="pMensaje"></p></div>
   <?php
 
-  if ($_SESSION['tipo'] == 'Administrador') {
-
     if (isset($_POST["btnTransporte"])) {
       $espacio = $_POST['txtEspacio'];
 
@@ -150,12 +148,5 @@ session_start();
             </div>
         </form>
     </div>
-    <?php
-  }
-  else{
-    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
-  }
-
-    ?>
 </body>
 </html>
