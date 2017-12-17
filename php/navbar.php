@@ -51,7 +51,6 @@
                 ?>
               <!-- Quitar si se conecta alguien only-->
               <li><a class="dropdown-item" href="login.php">Conectarse</a></li>
-              <li><a class="dropdown-item" href="#" id="Registro">Registrarse</a></li>
 
               <?php
             }

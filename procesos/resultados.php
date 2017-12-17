@@ -112,8 +112,13 @@ try {
       }
     }
 
-
-    $jugador = $_SESSION['idJugador'];
+    if (isset($_SESSION['idJugador'])) {
+      $jugador = $_SESSION['idJugador'];
+      # code...
+    }
+    else{
+      $jugador = 0;
+    }
     $comprorbarInscripcion = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND idJugadorFK = $jugador");
     $comprorbarInscripcion->execute();
     $comprobarI = $comprorbarInscripcion->fetchAll(PDO::FETCH_ASSOC);

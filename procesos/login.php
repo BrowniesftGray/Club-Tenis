@@ -3,9 +3,8 @@ session_name("aplicacion");
 session_start();
 
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <!-- Standard Meta -->
     <meta charset="utf-8"/>
@@ -47,10 +46,6 @@ session_start();
       }
 
       include("../php/navbar.php");
-      ?>
-      <div id="formularios"></div>
-      <div id="divMensajes"><p id="pMensaje"></p></div>
-      <?php
 
 
     if (isset($_POST["btnLogin"])) {

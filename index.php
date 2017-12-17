@@ -129,8 +129,6 @@ session_start();
         </div>
       </div>
     </nav>
-<div id="formularios"></div>
-<div id="divMensajes"><p id="pMensaje"></p></div>
     <!-- Page Content -->
     <div class="container">
 
