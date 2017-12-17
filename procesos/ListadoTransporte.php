@@ -30,12 +30,20 @@ session_start();
 
 
     <style>
-      .cerrarSesion{
-        margin-left: 10%;
-        width: 80%;
-      }
+          .cerrarSesion{
+            margin-left: 10%;
+            width: 80%;
+          }
 
-    </style>
+          .table > tbody > tr > td {
+           vertical-align: middle;
+           text-align: center;
+          }
+          .table > thead > tr > th {
+           vertical-align: middle;
+           text-align: center;
+          }
+        </style>
 
   </head>
 
