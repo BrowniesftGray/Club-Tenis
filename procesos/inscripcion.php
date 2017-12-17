@@ -76,8 +76,6 @@ session_start();
   <div id="divMensajes"><p id="pMensaje"></p></div>
   <?php
 
-  if ($_SESSION['tipo'] == 'Administrador') {
-
     if (isset($_GET['idCompeticion'])) {
       $idCompeticion = $_GET['idCompeticion'];
           //echo "<script>alert($idCompeticion)</script>";
@@ -298,10 +296,6 @@ session_start();
           </div>
         </div>
     <?php
-  }
-  }
-  else{
-    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
   }
     ?>
   </div>
