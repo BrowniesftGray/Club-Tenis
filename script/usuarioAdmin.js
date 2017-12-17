@@ -89,12 +89,12 @@ function respuestaUsuarioAdmin(oArrayRespuesta){
 
   if (oArrayRespuesta[0] == true){
       $("#divMensajes").dialog("option","title","Error");
-      $("#pMensaje").text('Se ha dado de alta al usuario con éxito');
+      $("#pMensaje").text(oArrayRespuesta[1]);
       location.reload();
   } else {
       $('#divfrmBajaMedico').dialog("close");
       $("#divMensajes").dialog("option","title","OK");
-      $("#pMensaje").text(oArrayRespuesta[1]);
+      $("#pMensaje").text('Se ha dado de alta al usuario con éxito');
   }
 }
 
