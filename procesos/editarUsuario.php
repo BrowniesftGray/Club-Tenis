@@ -127,7 +127,6 @@ session_start();
       $email = $_POST['txtEmail'];
     }
 
-    echo $email;
 
 
     $sql2 = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='".$email."'");
