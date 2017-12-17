@@ -284,9 +284,11 @@ session_start();
 
             $row = $comentariosSql->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($row); $i++) {
+              echo '<div class="media"><div class="media-body"><h4 class="media-heading">';
               echo $row[$i]['nombreJugador'];
-              echo ": ";
+              echo "</h4><p>";
               echo $row[$i]['Comentario'];
+              echo "</p></div></div>";
             }
           }
           else{
