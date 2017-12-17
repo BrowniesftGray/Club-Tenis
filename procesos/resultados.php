@@ -66,6 +66,21 @@ try {
         margin-top: 4%;
       }
     </style>
+    <style>
+      .cerrarSesion{
+        margin-left: 10%;
+        width: 80%;
+      }
+
+      .table > tbody > tr > td {
+       vertical-align: middle;
+       text-align: center;
+      }
+      .table > thead > tr > th {
+       vertical-align: middle;
+       text-align: center;
+      }
+    </style>
 </head>
 <body>
   <?php

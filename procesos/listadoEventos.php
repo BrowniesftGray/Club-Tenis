@@ -1,4 +1,19 @@
-<?php
+<style>
+      .cerrarSesion{
+        margin-left: 10%;
+        width: 80%;
+      }
+
+      .table > tbody > tr > td {
+       vertical-align: middle;
+       text-align: center;
+      }
+      .table > thead > tr > th {
+       vertical-align: middle;
+       text-align: center;
+      }
+    </style>
+    <?php
 
 $usuario = 'root';
 $contraRoot = '';
@@ -37,7 +52,7 @@ die();
   $content .= "<tbody>";
 
   $row = $sql->fetchAll(PDO::FETCH_ASSOC);
-  
+
   for ($i=0; $i < count($row); $i++) {
     $content .= "<tr>";
       $content .= "<td>";
