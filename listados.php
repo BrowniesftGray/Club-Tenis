@@ -65,7 +65,6 @@ session_start();
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link" href="index.php">Inicio
-                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
@@ -79,6 +78,7 @@ session_start();
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Listados
                 </a>
+                <span class="sr-only">(current)</span>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li><a class="dropdown-item" id="listadoSocios" href="listados.php?Socios=1">Listado de socios</a></li>
                   <li><a class="dropdown-item" id="listadoEventos" href="listados.php?Eventos=1">Listado de eventos</a></li>
@@ -159,7 +159,7 @@ session_start();
           print "¡Error!: " . $e->getMessage() . "<br/>";
           die();
         }
-        
+
       if (isset($_GET['Socios'])) {
         echo '<h1 class="my-4">Listado de Socios</h1>';
         include("procesos/listadoSocios.php");
