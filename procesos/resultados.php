@@ -289,7 +289,12 @@ try {
     <?php
   }
     else{
-      echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, no puede ingresar resultados. <a href="../eventos.php">Vuelva a Eventos</a>.</div>';
+      if ($_SESSION['tipo'] != "") {
+        echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, no puede ingresar resultados. <a href="../eventos.php">Vuelva a Eventos</a>.</div>';
+    }
+    else{
+      echo '<div class="alert alert-danger alert-dismissable text-center" role="alert">No estás conectado, <a href="login.php">conéctese</a> para acceder a la funcionalidad de la web.</div>';
+    }
 
     }
 

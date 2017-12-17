@@ -14,7 +14,7 @@
       }
     </style>
     <?php
-
+if ($_SESSION['tipo'] == 'Administrador') {
 if (!isset($_POST['btnCompeticion'])) {
   ?>
   <div class="container form">
@@ -218,3 +218,11 @@ try {
           });
       });
   </script>
+  <?php
+  }
+  else{
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+  }
+    ?>
+  </body>
+  </html>

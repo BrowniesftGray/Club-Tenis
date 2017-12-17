@@ -40,6 +40,7 @@ session_start();
   <div id="formularios"></div>
   <div id="divMensajes"><p id="pMensaje"></p></div>
   <?php
+  if ($_SESSION['tipo'] == 'Administrador') {
   $usuario = 'root';
 $contraRoot = '';
 
@@ -53,7 +54,6 @@ try {
 
 
 
-  if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST["btnNoticia"])) {
         include("../php/Borrado/deleteNoticia.php");

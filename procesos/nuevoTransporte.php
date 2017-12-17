@@ -47,7 +47,7 @@ session_start();
   <div id="formularios"></div>
   <div id="divMensajes"><p id="pMensaje"></p></div>
   <?php
-
+if ($_SESSION['tipo'] != '') {
     if (isset($_POST["btnTransporte"])) {
       $espacio = $_POST['txtEspacio'];
 
@@ -148,5 +148,11 @@ session_start();
             </div>
         </form>
     </div>
+    <?php
+  }
+  else{
+    echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button><a href="login.php>"conéctese</a>';
+  }
+    ?>
 </body>
 </html>

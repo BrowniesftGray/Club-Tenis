@@ -44,6 +44,7 @@ session_start();
     echo '<div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No tiene acceso a esta características en el móvil.</div>';
   }
   else{
+    if ($_SESSION['tipo'] == 'Administrador') {
     $usuario = 'root';
     $contraRoot = '';
 
@@ -60,7 +61,6 @@ session_start();
   <?php
 
 
-  if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST['btnActualizar'])) {
       include("../php/Modificaciones/updateUsuario.php");

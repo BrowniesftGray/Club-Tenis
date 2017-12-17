@@ -14,7 +14,7 @@
       }
     </style>
     <?php
-
+if ($_SESSION['tipo'] == 'Administrador') {
 $usuario = 'root';
 $contraRoot = '';
 
@@ -128,3 +128,11 @@ die();
           });
       });
   </script>
+  <?php
+  }
+  else{
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
+  }
+    ?>
+  </body>
+  </html>
