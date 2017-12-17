@@ -67,7 +67,7 @@
               ?>
               <hr>
                <!-- Colocar si se conecta alguien-->
-               <form action="index.php" method="post">
+               <form action="../index.php" method="post">
                  <li>
                    <button type="submit" name="destruirSesion" class="btn btn-danger cerrarSesion">Cerrar Sesión</button>
                  </li>

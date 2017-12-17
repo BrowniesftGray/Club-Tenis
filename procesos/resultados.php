@@ -282,6 +282,11 @@ try {
             </div>
         </form>
     <?php
+  }
+    else{
+      echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, no puede ingresar resultados. <a href="../eventos.php">Vuelva a Eventos</a>.</div>';
+
+    }
 
     //Resultados para la competición
     $participantes = array();
@@ -308,7 +313,7 @@ try {
     }
 
 
-    echo "<div class='row' style='padding-top: 1rem'><table class='table table-bordered'>";
+    echo "<div class='container'><div class='row' style='padding-top: 1rem'><table class='table table-bordered'>";
     echo "<thead>";
       echo "<tr>";
       echo "<th>";
@@ -392,13 +397,8 @@ try {
         echo "</td>";
       echo "</tr>";
     }
-    echo "</table></div>";
+    echo "</table></div></div>";
 
-  }
-  else{
-    echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
-
-  }
     ?>
   </div>
   </body>
