@@ -127,6 +127,7 @@ session_start();
       $email = $_POST['txtEmail'];
     }
 
+    echo $email;
 
 
     $sql2 = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='".$email."'");
@@ -168,10 +169,9 @@ session_start();
                   <label  for="txtEmail">Email</label>
 
                     <?php
-                    echo '<input id="txtEmail" name="txtEmail" type="text" placeholder="ejemplo@correo.com" class="form-control" value="'.$email.'">';
+                    echo '<input id="txtEmail" name="txtEmail" type="text" placeholder="ejemplo@correo.com" class="form-control" value="'.$email.'" readonly="true">';
                     ?>
                   </input>
-                    </div>
                 </div>
             </div>
           </div>
@@ -185,7 +185,6 @@ session_start();
                       <?php
                       echo '<input id="txtNombre" type="text" name="txtNombre" placeholder="Mario Sánchez" class="form-control" value="'.$nombre.'">';
                       ?>
-                    </div>
                 </div>
             </div>
           </div>
@@ -200,7 +199,6 @@ session_start();
                       echo '<input id="txtContra" type="password" name="txtContra" placeholder="cinco Caracteres Minimo" class="form-control" value="'.$contra.'">';
                       ?>
                     </input>
-                    </div>
                 </div>
             </div>
           </div>
@@ -215,7 +213,6 @@ session_start();
                       echo '<input id="txtDireccion" type="text" name="txtDireccion" placeholder="Avenida de España, 14" class="form-control" value="'.$direccion.'">';
                       ?>
                     </input>
-                    </div>
                 </div>
             </div>
         </div>
@@ -230,7 +227,6 @@ session_start();
                       echo '<input id="txtTelefono" type="text" name="txtTelefono" placeholder="955 08 54 89" class="form-control" value="'.$telefono.'">';
                       ?>
                     </input>
-                    </div>
                 </div>
             </div>
         </div>
@@ -245,7 +241,6 @@ session_start();
                         <option value="Usuario">Usuario</option>
                         <option value="Administrador">Administrador</option>
                       </select>
-                    </div>
                 </div>
             </div>
           </div>
