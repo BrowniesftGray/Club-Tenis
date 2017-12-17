@@ -75,7 +75,6 @@ try {
   <div id="formularios"></div>
   <div id="divMensajes"><p id="pMensaje"></p></div>
   <?php
-  if ($_SESSION['tipo'] == 'Administrador') {
 
     if (isset($_POST["btnTransporte"])) {
       $espacio = $_POST['elegirContrincante'];
@@ -384,10 +383,6 @@ try {
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No estaba inscrito a esta competición, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
 
-  }
-  }
-  else{
-    echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../eventos.php">vuelva a Eventos</a>.</div>';
   }
     ?>
   </div>
