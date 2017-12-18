@@ -31,7 +31,7 @@ if (!isset($_POST['btnEvento'])) {
 
 
                     //Realización de
-                    $sql = $con->prepare("SELECT * FROM competiciones");
+                    $sql = $con->prepare("SELECT * FROM competiciones ORDER BY fechaEvento DESC");
                     $sql->execute();
 
                     $row = $sql->fetchAll(PDO::FETCH_ASSOC);
