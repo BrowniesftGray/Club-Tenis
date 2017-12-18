@@ -69,7 +69,7 @@ die();
   $content .= '</style>';
   $content .= '</head><body>';
   $content .= "<div class='container'>";
-  $content .= "<div class='row' style='padding-top: 1rem'><table class='table table-bordered'>";
+  $content .= "<div class='row' style='padding-top: 1rem'><table class='table table-bordered table-hover'>";
   $content .= "<thead>";
   $content .= "<tr>";
   $content .= "<th>";
