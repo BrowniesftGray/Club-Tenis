@@ -65,7 +65,20 @@ session_start();
       .form{
         margin-top: 4%;
       }
-    </style>
+          .cerrarSesion{
+            margin-left: 10%;
+            width: 80%;
+          }
+
+          .table > tbody > tr > td {
+           vertical-align: middle;
+           text-align: center;
+          }
+          .table > thead > tr > th {
+           vertical-align: middle;
+           text-align: center;
+          }
+        </style>
 </head>
 <body>
 
@@ -283,20 +296,33 @@ session_start();
             $cuenta = $comentariosSql->rowCount();
 
             if ($cuenta>1) {
+              ?>
+              <br><div class="row"><table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                  <th>Usuario</th>
+                  <th>Comentario</th>
+                </tr>
+                </thead>
+                <tbody>
 
+              <?php
             $row = $comentariosSql->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($row); $i++) {
-              echo '<div class="media"><div class="media-body"><h4 class="media-heading">';
+              echo '<tr><td>';
               echo $row[$i]['nombreJugador'];
-              echo "</h4><p>";
+              echo "</td><td>";
               echo $row[$i]['Comentario'];
-              echo "</p></div></div>";
+              echo "</td></tr>";
             }
           }
           else{
             echo '<br><div class="alert alert-info alert-dismissable" role="alert">No hay comentarios de otros jugadores.</div>';
           }
             ?>
+          </tbody>
+        </table>
+          </div>
           </div>
         </div>
     <?php
