@@ -52,7 +52,7 @@ if (!isset($_POST['btnCompeticion'])) {
           <button type="submit" class="btn btn-success" name="btnCompeticion">Seleccionar Competicion</button>
       </div>
       <div class="col-md-3">
-          <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
+          <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="index.php"> Volver al Indice</button>
       </div>
   </div>
 </form>

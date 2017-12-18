@@ -54,7 +54,7 @@ if (!isset($_POST['btnEvento'])) {
           <button type="submit" class="btn btn-success" name="btnEvento">Seleccionar Competicion</button>
       </div>
       <div class="col-md-3">
-          <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../index.php"> Volver al Indice</button>
+          <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="index.php"> Volver al Indice</button>
       </div>
   </div>
 </form>
