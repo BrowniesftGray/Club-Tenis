@@ -19,11 +19,7 @@ try {
   $titulo = $titulo.$numero;
 
   $destino = "../imagenes/$titulo";
-  if(is_uploaded_file($_FILES['imagen']['tmp_name'])) { // verifica haya sido cargado el archivo
-    //echo "<pre>";
-    //print_r($_FILES);
-    //echo "</pre>";
-    //echo $_FILES['imagen']['name'];
+  if(is_uploaded_file($_FILES['imagen']['tmp_name'])) {
     $name = $_FILES['imagen']['name'];
     $final = $destino."_portada.jpg";
       if(move_uploaded_file($_FILES['imagen']['tmp_name'], $final)) {
