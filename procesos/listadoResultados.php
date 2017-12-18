@@ -27,9 +27,9 @@ if (!isset($_POST['btnCompeticion'])) {
 
                   <select class="form-control" name="elegirEvento">
                     <?php
-
+                    $date = date("Y-m-d");
                     //Realización de
-                    $sql = $con->prepare("SELECT * FROM competiciones");
+                    $sql = $con->prepare("SELECT * FROM competiciones WHERE fechaEvento < '".$date."' ORDER BY fechaEvento DESC");
                     $sql->execute();
 
                     $row = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -73,6 +73,14 @@ try {
   die();
 }
 
+
+
+
+  $content = '<html>';
+  $content .= '<head>';
+  $content .= '<style>';
+  $content .= '</style>';
+  $content .= '</head><body>';
   //Resultados para la competición
   $participantes = array();
 
@@ -97,64 +105,93 @@ try {
     }
   }
 
-  $content = '<html>';
-  $content .= '<head>';
-  $content .= '<style>';
-  $content .= '</style>';
-  $content .= '</head><body>';
-  $content .= "<div class='container'><div class='row' style='padding-top: 1rem'><table id='exportTable' class='table table-bordered table-hover'>";
+
+  $content .= "<div class='container'><div class='row' style='padding-top: 1rem'><table class='table table-bordered table-hover'>";
   $content .= "<thead>";
     $content .= "<tr>";
-      $content .= "<th>";
-        $content .= "Nombre";
-      $content .= "</th>";
-      $content .= "<th>";
-        $content .= "Victorias";
-      $content .= "</th>";
-      $content .= "<th>";
-        $content .= "Derrotas";
-      $content .= "</th>";
+    $content .= "<th>";
+      $content .= "Participante";
+    $content .= "</th>";
+    $content .= "<th>";
+      $content .= "Fase Alcanzada";
+    $content .= "</th>";
+    $content .= "<th>";
+      $content .= "Victorias";
+    $content .= "</th>";
     $content .= "</tr>";
   $content .= "</thead>";
-  $content .= "<tbody>";
 
   for ($i=0; $i < count($participantes); $i++) {
     $participante = $participantes[$i];
+
     $victorias = $con->prepare("SELECT COUNT(idGanador) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idGanador = $participante");
     $victorias->execute();
-    $derrotas = $con->prepare("SELECT COUNT(idPerdedor) FROM resultados WHERE idCompeticionFK = $idCompeticion AND idPerdedor = $participante");
-    $derrotas->execute();
 
-    $nombreJugador = $con->prepare("SELECT nombreJugador FROM jugadores WHERE idJugador = $participante");
+    $nombreJugador = $con->prepare("SELECT nombreJugador, emailJugador FROM jugadores WHERE idJugador = $participante");
     $nombreJugador->execute();
 
     $row = $victorias->fetchAll(PDO::FETCH_ASSOC);
+
+    $fase = $row[0]['COUNT(idGanador)'];
+    switch ($fase) {
+      case 0:
+        $fase = "Preliminares";
+        break;
+
+      case 1:
+        $fase = "Dieciseisavos";
+        break;
+
+      case 2:
+        $fase = "Octavos";
+        break;
+
+      case 3:
+        $fase = "Cuartos";
+        break;
+
+      case 4:
+        $fase = "Semifinal";
+        break;
+
+      case 5:
+        $fase = "Final";
+        break;
+
+      case 6:
+        $fase = "Ganador Final";
+        break;
+    }
+
     $data[$i]['Victorias'] = $row[0]['COUNT(idGanador)'];
 
-    $row = $derrotas->fetchAll(PDO::FETCH_ASSOC);
-    $data[$i]['Derrotas'] = $row[0]['COUNT(idPerdedor)'];
+    $data[$i]['Fase'] = $fase;
+
 
     $row = $nombreJugador->fetchAll(PDO::FETCH_ASSOC);
     $data[$i]['Nombre'] = $row[0]['nombreJugador'];
-
+    $data[$i]['Email'] = $row[0]['emailJugador'];
 
   }
+
   array_multisort($data, SORT_DESC);
   for ($i=0; $i < count($data); $i++) {
     $content .= "<tr>";
       $content .= "<td>";
         $content .= $data[$i]['Nombre'];
+      $content .= " - ";
+        $content .= $data[$i]['Email'];
+      $content .= "</td>";
+      $content .= "<td>";
+        $content .= $data[$i]['Fase'];
       $content .= "</td>";
       $content .= "<td>";
         $content .= $data[$i]['Victorias'];
       $content .= "</td>";
-      $content .= "<td>";
-        $content .= $data[$i]['Derrotas'];
-      $content .= "</td>";
     $content .= "</tr>";
   }
-  $content .= "</tbody>";
   $content .= "</table></div>";
+
   $content .= '</body></html>';
   echo $content;
   ?>
