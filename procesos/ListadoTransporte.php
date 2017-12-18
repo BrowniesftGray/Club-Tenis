@@ -63,13 +63,6 @@ print "¡Error!: " . $e->getMessage() . "<br/>";
 die();
 }
 
-//Resultados para la competición
-$participantes = array();
-
-$obtenerTransportes = $con->prepare("SELECT * FROM transporte WHERE idCompeticionFK=$idCompeticion");
-$obtenerTransportes->execute();
-$transportes = $obtenerTransportes->fetchAll(PDO::FETCH_ASSOC);
-
   $content = '<html>';
   $content .= '<head>';
   $content .= '<style>';
@@ -91,18 +84,15 @@ $transportes = $obtenerTransportes->fetchAll(PDO::FETCH_ASSOC);
   $content .= "</tr>";
   $content .= "</thead>";
 
-for ($i=0; $i < count($transportes); $i++) {
-  $idTransporte = $transportes[$i]['idTransporte'];
-  $idConductor = $transportes[$i]['idJugadorFK'];
-
-  $obtenerConductor = $con->prepare("SELECT * FROM usuarios WHERE idJugadorFK=$idConductor");
+  /*$obtenerConductor = $con->prepare("SELECT * FROM usuarios WHERE idJugadorFK=$idConductor");
   $obtenerConductor->execute();
   $conductor = $obtenerConductor->fetchAll(PDO::FETCH_ASSOC);
 
   $emailConductor = $conductor[0]['emailUsuario'];
   $nombreConductor = $conductor[0]['nombre'];
+  */
 
-  $obtenerPasajeros = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK=$idCompeticion AND idTransporteFK=$idTransporte");
+  $obtenerPasajeros = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK=$idCompeticion");
   $obtenerPasajeros->execute();
   $pasajeros = $obtenerPasajeros->fetchAll(PDO::FETCH_ASSOC);
 
@@ -115,7 +105,18 @@ for ($i=0; $i < count($transportes); $i++) {
     $emailPasajero = $pasajero[0]['emailUsuario'];
     $nombrePasajero = $pasajero[0]['nombre'];
 
-    if ($i == 0) {
+    $idTransporte = $pasajeros[$i]['idTransporteFK'];
+    $obtenerTransporte = $con->prepare("SELECT * FROM transporte WHERE idTransporte = $idTransporte");
+    $obtenerTransporte->execute();
+    $transporte = $obtenerTransporte->fetchAll(PDO::FETCH_ASSOC);
+    $idTransporteJugador = $transporte[0]['idJugadorFK'];
+
+    $obtenerConductor = $con->prepare("SELECT * FROM usuarios WHERE idJugadorFK=$idTransporteJugador");
+    $obtenerConductor->execute();
+    $conductor = $obtenerConductor->fetchAll(PDO::FETCH_ASSOC);
+
+    $emailConductor = $conductor[0]['emailUsuario'];
+    $nombreConductor = $conductor[0]['nombre'];
       //tr con nombre conductor (rowspan)
       $content .= "<tr>";
         $content .= "<td>";
@@ -124,24 +125,12 @@ for ($i=0; $i < count($transportes); $i++) {
         $content .= "<td>";
           $content .= $nombrePasajero;
         $content .= "</td>";
-        $content .= "<td rowspan='".count($pasajeros)."'>";
+        $content .= "<td>";
           $content .= $nombreConductor;
           $content .= " - ";
           $content .= $emailConductor;
         $content .= "</td>";
       $content .= "</tr>";
-    }
-    else{
-      //tr sin nombre conductor
-      $content .= "<tr>";
-        $content .= "<td>";
-          $content .= $emailPasajero;
-        $content .= "</td>";
-        $content .= "<td>";
-          $content .= $nombrePasajero;
-        $content .= "</td>";
-      $content .= "</tr>";
-    }
   }
 $content .= "</table></div>";
 
@@ -151,7 +140,6 @@ echo $content;
 <button id="exportButtonR" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Exportar a PDF</button>
 <button type="button" name="imprimir" onclick="window.print();" class="btn btn-lg btn-info"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button></div>
 <?php
-}
 
 ?>
 <!-- you need to include the shieldui css and js assets in order for the components to work -->

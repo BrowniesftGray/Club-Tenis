@@ -44,7 +44,13 @@ try {
       $insertarInscripcion = $con->prepare("INSERT INTO inscripciones (idCompeticionFK, idTransporteFK, Comentario, idJugadorFK) VALUES ($idCompeticion, $idTransporte, '$comentario', $idJugador)");
       $insertarInscripcion->execute();
 
-      $insertarCompeticion = $con->prepare("UPDATE transporte SET espacioDisponible=espacioDisponible-1 WHERE idCompeticionFK = $idCompeticion AND idJugadorFK = $idJugador");
+      $selectEspacio = $con->prepare("SELECT espacioDisponible FROM transporte WHERE idTransporte = $idTransporte");
+      $selectEspacio->execute();
+      $row = $selectEspacio->fetchAll(PDO::FETCH_ASSOC);
+      $espacio = $row[0]['espacioDisponible'];
+      $espacio = $espacio-1;
+
+      $insertarCompeticion = $con->prepare("UPDATE transporte SET espacioDisponible=$espacio WHERE idTransporte = $idTransporte");
       $insertarCompeticion->execute();
     }
     echo '<div class="alert alert-success alert-dismissable" role="alert">Se ha inscrito a esta competicion.</div>';
