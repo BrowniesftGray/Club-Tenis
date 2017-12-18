@@ -66,7 +66,7 @@ die();
         $content .= $row[$i]['emailUsuario'];
       $content .= "</td>";
       $content .= "<td>";
-        $content .= utf8_decode($row[$i]['nombre']);
+        $content .= $row[$i]['nombre'];
       $content .= "</td>";
       $content .= "<td>";
         $content .= $row[$i]['direccion'];
