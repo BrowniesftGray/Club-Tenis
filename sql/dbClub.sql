@@ -44,7 +44,7 @@ CREATE TABLE `competiciones` (
 
 INSERT INTO `competiciones` (`idCompeticion`, `nombreEvento`, `fechaEvento`, `descripcion`) VALUES
 (7, 'Torneo de prueba', '2017-12-06', 'Descripción de prueba de torneo'),
-(13, 'Torneo Amateur', '2017-12-19', 'Torneo Amateur del club deportivo de tenis Or');
+(13, 'Torneo Amateur', '2017-12-19', 'Torneo Amateur del club deportivo de tenis Oromana');
 
 -- --------------------------------------------------------
 
