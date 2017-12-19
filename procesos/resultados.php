@@ -119,15 +119,16 @@ try {
     else{
       $jugador = 0;
     }
+
+    //Se comprueba que el usuario esté inscrito. Si la cuenta es 1 entonces va bien, sino falla.
     $comprorbarInscripcion = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND idJugadorFK = $jugador");
     $comprorbarInscripcion->execute();
     $comprobarI = $comprorbarInscripcion->fetchAll(PDO::FETCH_ASSOC);
     $cuenta = count($comprobarI);
 
     if ($cuenta == 1) {
-      # code...
 
-    $jugador = $_SESSION['idJugador'];
+    //Comprobamos cual es la última fase del usuario, si no tiene es preliminares si tiene se determina.
     $comprobarFase = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $jugador OR idPerdedor = $jugador) ORDER BY Fase DESC");
     $comprobarFase->execute();
 
@@ -140,6 +141,7 @@ try {
     else{
       $fase = $row[0]['Fase'];
 
+      //Se añade un número a la fase, después se comprueba si venció.
       switch ($fase) {
         case 1:
           $numFase = 2;
@@ -168,6 +170,7 @@ try {
       }
 
 
+      //Se comprueba si el jugador perdió en su anterior partido.
       if ($row[0]['idPerdedor'] == $jugador) {
         $meterResultado = false;
       }
@@ -176,15 +179,18 @@ try {
       }
     }
 
+    //Seleccionamos los contrincantes inscritos.
     $conseguirContrincante = $con->prepare("SELECT * FROM inscripciones WHERE idCompeticionFK = $idCompeticion AND NOT idJugadorFK = $jugador");
     $conseguirContrincante->execute();
     $row = $conseguirContrincante->fetchAll(PDO::FETCH_ASSOC);
 
-    //print_r($row);
+
     $contrincantes = array();
+
     for ($i=0; $i < count($row); $i++) {
       $idContrincante = $row[$i]['idJugadorFK'];
 
+      //Si el numero de la fase es 1, comprueba que no tenga resultados.
       if ($numFase == 1) {
         $comprobarOponenteRegistro = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante)");
         $comprobarOponenteRegistro->execute();
@@ -200,30 +206,24 @@ try {
         }
       }
       else{
-      }
-      $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
-      $comprobarContrincante->execute();
 
-      $oponentes = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
+        //Se comprueban los contrincantes de la ronda anterior, si han ganado se añaden a los contrincantes.
+          $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase-1 ORDER BY Fase");
+          $comprobarContrincante->execute();
+          $perdedorOponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
 
-      if (count($oponentes) == 0) {
-        $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
-        $comprobarContrincante->execute();
-        $perdedorOponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
+          if (count($perdedorOponente) > 0) {
 
-        if (count($perdedorOponente) > 0) {
-          # code...
-        if ($perdedorOponente[0]['idGanador'] == $idContrincante) {
+            if ($perdedorOponente[0]['idGanador'] == $idContrincante) {
 
-
-        $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
-        $nombreContrincante->execute();
-        $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
-        $nombreC = $nombreLista[0]['nombreJugador'];
-        $contrincantes[$i]['idContrincante'] = $idContrincante;
-        $contrincantes[$i]['nombreContrincante'] = $nombreC;
-      }
-    }
+              $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
+              $nombreContrincante->execute();
+              $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
+              $nombreC = $nombreLista[0]['nombreJugador'];
+              $contrincantes[$i]['idContrincante'] = $idContrincante;
+              $contrincantes[$i]['nombreContrincante'] = $nombreC;
+            }
+        }
       }
 
     }
@@ -301,23 +301,20 @@ try {
             </div>
             <div class="row" style="padding-top: 1rem">
               <?php
-              echo '<div class="col-md-3"></div>';
-              echo '<div class="col-md-4">';
-              if (isset($meterResultado)) {
-                # code...
-              if ($meterResultado == false) {
-                echo '<button type="submit" class="btn" name="btnTransporte" disabled>Añadir resultado</button>';
-
-                    # code...
-                  }
+                echo '<div class="col-md-3"></div>';
+                echo '<div class="col-md-4">';
+                if (isset($meterResultado)) {
+                  if ($meterResultado == false) {
+                    echo '<button type="submit" class="btn" name="btnTransporte" disabled>Añadir resultado</button>';
+                      }
                   else{
                     echo '<button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>';
-                  }
+                    }
                 }
                 else{
                   echo '<button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>';
                 }
-                  ?>
+              ?>
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../eventos.php">Volver a Eventos</button>
@@ -341,11 +338,8 @@ try {
     $resultados = $resultadosGenerales->fetchAll(PDO::FETCH_ASSOC);
     if (count($resultados) > 0) {
 
-    //Resultados para la competición
-    $participantes = array();
-
     //Obtenemos ganadores
-    $obtenerGanadores = $con->prepare("SELECT DISTINCT idGanador FROM resultados WHERE idCompeticionFK=$idCompeticion ORDER BY COUNT(idGanador)");
+    $obtenerGanadores = $con->prepare("SELECT DISTINCT idGanador FROM resultados WHERE idCompeticionFK=$idCompeticion");
     $obtenerGanadores->execute();
     $ganadores = $obtenerGanadores->fetchAll(PDO::FETCH_ASSOC);
     for ($i=0; $i < count($ganadores); $i++) {
@@ -434,20 +428,22 @@ try {
       $data[$i]['Email'] = $row[0]['emailJugador'];
 
     }
-
+    /*echo "<pre>";
+    print_r($ganadores);
+    echo "</pre>";*/
     array_multisort($data, SORT_DESC);
-    for ($i=0; $i < count($data); $i++) {
+    foreach ($data as $key => $value) {
       echo "<tr>";
         echo "<td>";
-          echo $data[$i]['Nombre'];
+          echo $value['Nombre'];
         echo " - ";
-          echo $data[$i]['Email'];
+          echo $value['Email'];
         echo "</td>";
         echo "<td>";
-          echo $data[$i]['Fase'];
+          echo $value['Fase'];
         echo "</td>";
         echo "<td>";
-          echo $data[$i]['Victorias'];
+          echo $value['Victorias'];
         echo "</td>";
       echo "</tr>";
     }
