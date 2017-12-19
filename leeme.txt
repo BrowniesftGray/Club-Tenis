@@ -1,5 +1,3 @@
 Usuario administrador:
   email: admin@prueba.com
   contaseña: admin
-
-Usuario normal -> Se puede registrar uno mediante la web
