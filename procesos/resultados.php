@@ -180,13 +180,13 @@ try {
     $conseguirContrincante->execute();
     $row = $conseguirContrincante->fetchAll(PDO::FETCH_ASSOC);
 
+    //print_r($row);
     $contrincantes = array();
     for ($i=0; $i < count($row); $i++) {
       $idContrincante = $row[$i]['idJugadorFK'];
 
       $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
       $comprobarContrincante->execute();
-      //print_r($comprobarContrincante);
 
       $oponentes = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
 
@@ -200,6 +200,20 @@ try {
         if ($perdedorOponente[0]['idGanador'] == $idContrincante) {
 
 
+        $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
+        $nombreContrincante->execute();
+        $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
+        $nombreC = $nombreLista[0]['nombreJugador'];
+        $contrincantes[$i]['idContrincante'] = $idContrincante;
+        $contrincantes[$i]['nombreContrincante'] = $nombreC;
+      }
+    }
+    else{
+      $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante)");
+      $comprobarContrincante->execute();
+      $oponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
+
+      if (count($oponente) == 0) {
         $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
         $nombreContrincante->execute();
         $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
@@ -298,6 +312,11 @@ try {
 
     }
 
+    $resultadosGenerales = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK=$idCompeticion");
+    $resultadosGenerales->execute();
+    $resultados = $resultadosGenerales->fetchAll(PDO::FETCH_ASSOC);
+    if (count($resultados) > 0) {
+
     //Resultados para la competición
     $participantes = array();
 
@@ -337,6 +356,7 @@ try {
       echo "</th>";
       echo "</tr>";
     echo "</thead>";
+
 
     for ($i=0; $i < count($participantes); $i++) {
       $participante = $participantes[$i];
@@ -407,7 +427,13 @@ try {
         echo "</td>";
       echo "</tr>";
     }
-    echo "</table></div></div>";
+
+    echo "</table></div>";
+}
+  else{
+    echo '<br><div class="alert alert-warning alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>No hay Resultados</div>';
+  }
+  echo "</div>";
 
     ?>
   </div>
