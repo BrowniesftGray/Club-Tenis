@@ -35,7 +35,7 @@ CREATE TABLE `competiciones` (
   `idCompeticion` int(11) NOT NULL,
   `nombreEvento` varchar(45) DEFAULT NULL,
   `fechaEvento` date DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL
+  `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `inscripciones` (
   `idJugadorFK` int(11) DEFAULT NULL,
   `idCompeticionFK` int(11) DEFAULT NULL,
   `idTransporteFK` int(11) DEFAULT NULL,
-  `Comentario` varchar(50) NOT NULL
+  `Comentario` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --

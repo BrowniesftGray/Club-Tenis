@@ -68,7 +68,7 @@ session_start();
         $sError = "";
       }
       else{
-        $sError .= "La contraseña debe tener 6 dígitos o más";
+        $sError .= "La contraseña debe tener 5 dígitos o más";
         $bValido = false;
       }
 
