@@ -75,7 +75,15 @@ try {
 
 
 
+  $comprobarResultados = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK=$idCompeticion");
+  $comprobarResultados->execute();
+  $cuenta = $comprobarResultados->fetchAll(PDO::FETCH_ASSOC);
 
+  if (count($cuenta) == 0) {
+  echo '</div><div class="alert alert-warning alert-dismissable" role="alert">No hay resultados, <a href="index.php">vuelva al inicio</a>.</div>';
+
+  }
+  else{
   $content = '<html>';
   $content .= '<head>';
   $content .= '<style>';
@@ -85,7 +93,7 @@ try {
   $participantes = array();
 
   //Obtenemos ganadores
-  $obtenerGanadores = $con->prepare("SELECT DISTINCT idGanador FROM resultados WHERE idCompeticionFK=$idCompeticion ORDER BY COUNT(idGanador)");
+  $obtenerGanadores = $con->prepare("SELECT DISTINCT idGanador FROM resultados WHERE idCompeticionFK=$idCompeticion");
   $obtenerGanadores->execute();
   $ganadores = $obtenerGanadores->fetchAll(PDO::FETCH_ASSOC);
   for ($i=0; $i < count($ganadores); $i++) {
@@ -257,6 +265,7 @@ try {
   </script>
   <?php
   }
+}
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
   }
