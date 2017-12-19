@@ -185,6 +185,20 @@ try {
     for ($i=0; $i < count($row); $i++) {
       $idContrincante = $row[$i]['idJugadorFK'];
 
+      if ($numFase == 1) {
+        $comprobarOponenteRegistro = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante)");
+        $comprobarOponenteRegistro->execute();
+        $comprobarOponenteCuenta = $comprobarOponenteRegistro->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($comprobarOponenteCuenta) == 0) {
+          $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
+          $nombreContrincante->execute();
+          $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
+          $nombreC = $nombreLista[0]['nombreJugador'];
+          $contrincantes[$i]['idContrincante'] = $idContrincante;
+          $contrincantes[$i]['nombreContrincante'] = $nombreC;
+        }
+      }
       $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
       $comprobarContrincante->execute();
 
@@ -200,20 +214,6 @@ try {
         if ($perdedorOponente[0]['idGanador'] == $idContrincante) {
 
 
-        $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
-        $nombreContrincante->execute();
-        $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
-        $nombreC = $nombreLista[0]['nombreJugador'];
-        $contrincantes[$i]['idContrincante'] = $idContrincante;
-        $contrincantes[$i]['nombreContrincante'] = $nombreC;
-      }
-    }
-    else{
-      $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante)");
-      $comprobarContrincante->execute();
-      $oponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
-
-      if (count($oponente) == 0) {
         $nombreContrincante = $con->prepare("SELECT * FROM jugadores WHERE idJugador = $idContrincante");
         $nombreContrincante->execute();
         $nombreLista = $nombreContrincante->fetchAll(PDO::FETCH_ASSOC);
