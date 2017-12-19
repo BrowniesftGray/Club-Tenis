@@ -15,10 +15,18 @@ try {
   die();
 }
 
+  $comprobarTransporte = $con->prepare("SELECT * FROM transporte WHERE idCompeticionFK = $competicion AND idJugadorFK = $jugador");
+  $comprobarTransporte->execute();
+  $comprobacion = $comprobarTransporte->fetchAll(PDO::FETCH_ASSOC);
 
-  $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($jugador, $espacio, $competicion)");
-  $insertJugador->execute();
+  if (count($comprobacion) > 0) {
+    echo '<div class="alert alert-warning alert-dismissable" role="alert">Ya añadió un transporte anteriormente.</div>';
+  }
+  else{
+    $insertJugador = $con->prepare("INSERT INTO transporte (idJugadorFK, espacioDisponible, idCompeticionFK) VALUES ($jugador, $espacio, $competicion)");
+    $insertJugador->execute();
 
-  echo '<div class="alert alert-success alert-dismissable" role="alert">Se ha añdido el transporte.</div>';
+    echo '<div class="alert alert-success alert-dismissable" role="alert">Se ha añdido el transporte.</div>';
+  }
 
 ?>
