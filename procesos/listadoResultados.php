@@ -80,8 +80,7 @@ try {
   $cuenta = $comprobarResultados->fetchAll(PDO::FETCH_ASSOC);
 
   if (count($cuenta) == 0) {
-  echo '</div><div class="alert alert-warning alert-dismissable" role="alert">No hay resultados, <a href="index.php">vuelva al inicio</a>.</div>';
-
+    echo '</div><div class="alert alert-warning alert-dismissable" role="alert">No hay resultados, <a href="index.php">vuelva al inicio</a>.</div>';
   }
   else{
   $content = '<html>';
@@ -206,7 +205,6 @@ try {
   <button id="exportButtonR" class="btn btn-lg btn-danger clearfix"><span class="fa fa-file-pdf-o"></span> Exportar a PDF</button>
   <button type="button" name="imprimir" onclick="window.print();" class="btn btn-lg btn-info"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button></div>
   <?php
-}
 
   ?>
   <!-- you need to include the shieldui css and js assets in order for the components to work -->
@@ -265,6 +263,7 @@ try {
   </script>
   <?php
   }
+}
 }
   else{
     echo '<div class="alert alert-warning alert-dismissable" role="alert">No tiene acceso a este característica, <a href="../index.php">vuelva al inicio</a>.</div>';
