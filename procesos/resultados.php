@@ -199,13 +199,15 @@ try {
           $contrincantes[$i]['nombreContrincante'] = $nombreC;
         }
       }
+      else{
+      }
       $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
       $comprobarContrincante->execute();
 
       $oponentes = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
 
       if (count($oponentes) == 0) {
-        $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase-1 ORDER BY Fase");
+        $comprobarContrincante = $con->prepare("SELECT * FROM resultados WHERE idCompeticionFK = $idCompeticion AND (idGanador = $idContrincante OR idPerdedor = $idContrincante) AND Fase = $numFase ORDER BY Fase");
         $comprobarContrincante->execute();
         $perdedorOponente = $comprobarContrincante->fetchAll(PDO::FETCH_ASSOC);
 
@@ -222,9 +224,16 @@ try {
         $contrincantes[$i]['nombreContrincante'] = $nombreC;
       }
     }
-
       }
+
     }
+    if (isset($meterResultado)) {
+      # code...
+    if ($meterResultado == false) {
+      echo '<div class="alert alert-warning alert-dismissable" role="alert">Perdió en su partido anterior.</div>';
+
+    }
+  }
   ?>
         <div class="container form">
         <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
@@ -291,9 +300,24 @@ try {
                 </div>
             </div>
             <div class="row" style="padding-top: 1rem">
-                <div class="col-md-3"></div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>
+              <?php
+              echo '<div class="col-md-3"></div>';
+              echo '<div class="col-md-4">';
+              if (isset($meterResultado)) {
+                # code...
+              if ($meterResultado == false) {
+                echo '<button type="submit" class="btn" name="btnTransporte" disabled>Añadir resultado</button>';
+
+                    # code...
+                  }
+                  else{
+                    echo '<button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>';
+                  }
+                }
+                else{
+                  echo '<button type="submit" class="btn btn-success" name="btnTransporte">Añadir Resultado</button>';
+                }
+                  ?>
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-danger active" name="btnVolver" formaction="../eventos.php">Volver a Eventos</button>
