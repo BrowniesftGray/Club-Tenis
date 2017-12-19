@@ -25,6 +25,10 @@ try {
   $sql->execute();
   $cuenta = $sql->rowCount();
 
+  $sql = $con->prepare("SELECT * FROM usuarios WHERE emailUsuario='$email'");
+  $sql->execute();
+  $cuenta2 = $sql->rowCount();
+
   if ($cuenta==1) {
     $row = $sql->fetchAll(PDO::FETCH_ASSOC);
     $tipo = $row[0]['tipoPerfil'];
@@ -46,7 +50,13 @@ try {
   }
 
   if ($respuesta['existe'] == 'No') {
-    echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button> No existe el usuario</div>';
+    if ($cuenta2 == 1) {
+      echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button> Ha introducido mal la contraseña</div>';
+    }
+    else{
+      echo '<div class="alert alert-warning alert-dismissable" role="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button> No existe el usuario</div>';
+
+    }
   }
   else{
     header("Location:../index.php");
