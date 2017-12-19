@@ -283,11 +283,11 @@ try {
                               echo "<option value='0'> No hay contrincantes</option>";
                             }
                             else{
-                            for ($i=0; $i < count($contrincantes); $i++) {
-                              echo '<option value="'.$contrincantes[$i]["idContrincante"].'">';
-                              echo $contrincantes[$i]['nombreContrincante'];
-                              echo "</option>";
-                            }
+                              foreach ($contrincantes as $key => $value) {
+                                echo '<option value="'.$value["idContrincante"].'">';
+                                echo $value['nombreContrincante'];
+                                echo "</option>";
+                              }
                           }
                             ?>
                           </select>
